@@ -1,0 +1,32 @@
+{
+  "name": "log-level-changer-cli",
+  "version": "1.0.0",
+  "description": "A simple command-line tool to dynamically change the log level of a running Node.js application without restarting it.",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "log-level-changer": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0"
+  },
+  "keywords": [
+    "log",
+    "loglevel",
+    "cli",
+    "nodejs",
+    "debugging",
+    "production",
+    "staging"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
