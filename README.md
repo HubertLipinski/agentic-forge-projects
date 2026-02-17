@@ -6,4 +6,5 @@
 
 | # | Project | Description | Category | Difficulty |
 |---|---------|-------------|----------|------------|
+| 002 | [Simple Configuration File Generator](projects/002-simple-config-generator/) | A command-line tool that generates basic configuration files (e.g., JSON, YAML) based on a predefined template and user-provided values. Useful for quickly scaffolding configuration for new projects, services, or applications. | code-generator | beginner |
 | 001 | [Log Level Changer CLI](projects/001-log-level-changer/) | A simple command-line tool to dynamically change the log level of a running Node.js application without restarting it. Useful for debugging in production or staging environments by temporarily increasing log verbosity. Developers and operations teams can use this to quickly inspect application behavior. | testing-tool | beginner |
