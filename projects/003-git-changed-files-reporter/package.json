@@ -1,0 +1,29 @@
+{
+  "name": "git-changed-files-reporter",
+  "version": "1.0.0",
+  "description": "A Node.js utility to report on files changed in a Git repository since a specified reference.",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "git-changed-files-reporter": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "git",
+    "changes",
+    "files",
+    "reporter",
+    "ci",
+    "cd",
+    "automation"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {}
+}

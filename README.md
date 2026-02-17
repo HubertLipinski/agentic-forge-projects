@@ -6,5 +6,6 @@
 
 | # | Project | Description | Category | Difficulty |
 |---|---------|-------------|----------|------------|
+| 003 | [Git Changed Files Reporter](projects/003-git-changed-files-reporter/) | A Node.js utility to report on files changed in a Git repository since a specified reference (commit, tag, or branch). Useful for CI/CD pipelines to determine which files need processing or testing. | utility | beginner |
 | 002 | [Simple Configuration File Generator](projects/002-simple-config-generator/) | A command-line tool that generates basic configuration files (e.g., JSON, YAML) based on a predefined template and user-provided values. Useful for quickly scaffolding configuration for new projects, services, or applications. | code-generator | beginner |
 | 001 | [Log Level Changer CLI](projects/001-log-level-changer/) | A simple command-line tool to dynamically change the log level of a running Node.js application without restarting it. Useful for debugging in production or staging environments by temporarily increasing log verbosity. Developers and operations teams can use this to quickly inspect application behavior. | testing-tool | beginner |
