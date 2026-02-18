@@ -1,0 +1,25 @@
+{
+  "name": "discord-quote-bot",
+  "version": "1.0.0",
+  "description": "A simple Discord bot that allows users to save and retrieve memorable quotes from their server.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "quote",
+    "utility"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
