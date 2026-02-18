@@ -1,0 +1,59 @@
+{
+  "name": "llm-stream-parser",
+  "version": "1.0.0",
+  "description": "A lightweight, zero-dependency Node.js utility for parsing and normalizing streaming responses from various LLMs.",
+  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./openai": "./src/adapters/openai-adapter.js",
+    "./anthropic": "./src/adapters/anthropic-adapter.js",
+    "./gemini": "./src/adapters/gemini-adapter.js"
+  },
+  "files": [
+    "src/",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "c8 node --test",
+    "test:watch": "node --watch --test",
+    "coverage": "c8 report --reporter=lcov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/llm-stream-parser.git"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "stream",
+    "parser",
+    "sse",
+    "server-sent-events",
+    "openai",
+    "anthropic",
+    "gemini",
+    "claude",
+    "gpt",
+    "async",
+    "iterator"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/llm-stream-parser/issues"
+  },
+  "homepage": "https://github.com/your-username/llm-stream-parser#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "undici": "^6.18.2"
+  },
+  "devDependencies": {
+    "c8": "^9.1.0",
+    "sinon": "^17.0.1"
+  }
+}

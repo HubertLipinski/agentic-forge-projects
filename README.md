@@ -6,6 +6,7 @@
 
 | # | Project | Description | Category | Difficulty |
 |---|---------|-------------|----------|------------|
+| 005 | [LLM Stream Parser](projects/005-llm-stream-parser/) | A lightweight, zero-dependency Node.js utility for parsing and normalizing streaming responses from various Large Language Models (LLMs) like OpenAI, Anthropic, and Cohere. It handles different streaming formats (SSE, chunked JSON) and provides a consistent, asynchronous iterable interface for developers building real-time AI applications. | ai-wrapper | intermediate |
 | 004 | [Discord Quote Bot](projects/004-discord-quote-bot/) | A simple Discord bot that allows users to save and retrieve memorable quotes from their server. Useful for preserving funny moments, important discussion points, or inside jokes within a community. Anyone moderating or participating in a Discord server can use it. | discord-bot | beginner |
 | 003 | [Git Changed Files Reporter](projects/003-git-changed-files-reporter/) | A Node.js utility to report on files changed in a Git repository since a specified reference (commit, tag, or branch). Useful for CI/CD pipelines to determine which files need processing or testing. | utility | beginner |
 | 002 | [Simple Configuration File Generator](projects/002-simple-config-generator/) | A command-line tool that generates basic configuration files (e.g., JSON, YAML) based on a predefined template and user-provided values. Useful for quickly scaffolding configuration for new projects, services, or applications. | code-generator | beginner |
