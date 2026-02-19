@@ -1,0 +1,30 @@
+{
+  "appName": "JSON Merger App",
+  "version": "1.0.0",
+  "api": {
+    "baseUrl": "https://api.example.com/v1",
+    "timeout": 5000,
+    "retries": 3
+  },
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "user": "admin",
+    "dbName": "app_db"
+  },
+  "features": {
+    "enableAnalytics": true,
+    "enableCaching": true,
+    "showSplashScreen": false
+  },
+  "plugins": [
+    "plugin-A",
+    "plugin-B"
+  ],
+  "themes": [
+    {
+      "name": "default",
+      "path": "themes/default.css"
+    }
+  ]
+}

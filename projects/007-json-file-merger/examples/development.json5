@@ -1,0 +1,54 @@
+{
+  // This is a development-specific configuration file.
+  // It uses JSON5 syntax, allowing for comments, trailing commas, and unquoted keys.
+  // These settings will override the values in `base.json`.
+
+  // Override the API settings for local development
+  api: {
+    // Use a local development server instead of the production API.
+    baseUrl: "http://localhost:3000/api/v1",
+    // Increase timeout for easier debugging.
+    timeout: 30000,
+    // No need for retries in a local environment.
+    retries: 0,
+  },
+
+  // Use a local or containerized database for development.
+  database: {
+    host: "localhost",
+    user: "dev_user",
+    // The password is intentionally omitted here. It should be managed
+    // via environment variables, not committed to a config file.
+    // This demonstrates merging a partial object.
+  },
+
+  // Enable development-specific features.
+  features: {
+    // Disable analytics in development to avoid sending test data.
+    enableAnalytics: false,
+    // Disable caching to see changes immediately.
+    enableCaching: false,
+    // Show a splash screen, maybe for testing UI flows.
+    showSplashScreen: true,
+  },
+
+  // Add a development-specific plugin to the list.
+  // When merged with the 'concat' strategy (default), this will be
+  // appended to the plugins from base.json.
+  plugins: [
+    "plugin-dev-tools",
+  ],
+
+  // Example of overriding an array of objects.
+  // With the 'merge' array strategy, this would merge the object at index 0.
+  // With 'replace', it would replace the entire `themes` array.
+  // With 'concat', it would add this object to the end of the array.
+  themes: [
+    {
+      name: "debug",
+      path: "themes/debug.css",
+      // Trailing comma is allowed in JSON5
+      showGrid: true,
+    },
+  ],
+}

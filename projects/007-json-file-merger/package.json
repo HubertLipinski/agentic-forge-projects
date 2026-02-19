@@ -1,0 +1,44 @@
+{
+  "name": "json-file-merger",
+  "version": "1.0.0",
+  "description": "A lightweight command-line utility for intelligently merging multiple JSON or JSON5 files into a single output file.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "merge-json": "bin/merge-json.js"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "json",
+    "json5",
+    "merge",
+    "config",
+    "cli",
+    "tool",
+    "deepmerge",
+    "glob"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/json-file-merger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/json-file-merger/issues"
+  },
+  "homepage": "https://github.com/your-username/json-file-merger#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "chokidar": "^3.6.0",
+    "deepmerge": "^4.3.1",
+    "glob": "^10.4.1",
+    "json5": "^2.2.3",
+    "yargs": "^17.7.2"
+  }
+}
