@@ -1,0 +1,45 @@
+{
+  "name": "matrix-solver-js",
+  "version": "1.0.0",
+  "description": "A pure JavaScript linear algebra library for solving large and sparse systems of linear equations (Ax=b) using iterative methods.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "matrix-solve": "bin/solve.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/matrix-solver-js.git"
+  },
+  "keywords": [
+    "linear-algebra",
+    "matrix",
+    "solver",
+    "iterative-methods",
+    "conjugate-gradient",
+    "gmres",
+    "sparse-matrix",
+    "scientific-computing",
+    "nodejs"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/matrix-solver-js/issues"
+  },
+  "homepage": "https://github.com/your-username/matrix-solver-js#readme",
+  "dependencies": {
+    "mathjs": "^12.4.2",
+    "yargs": "^17.7.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
