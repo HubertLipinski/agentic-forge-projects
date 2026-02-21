@@ -1,0 +1,47 @@
+{
+  "name": "csv-stream-transformer",
+  "version": "1.0.0",
+  "description": "A lightweight, stream-based Node.js library for transforming large CSV files with minimal memory usage.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "transform-csv": "bin/transform.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test",
+    "example": "node examples/run-example.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/csv-stream-transformer.git"
+  },
+  "keywords": [
+    "csv",
+    "stream",
+    "transform",
+    "etl",
+    "data-processing",
+    "large-files",
+    "pipeline",
+    "node"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/csv-stream-transformer/issues"
+  },
+  "homepage": "https://github.com/your-username/csv-stream-transformer#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "csv-parse": "^5.5.5",
+    "csv-stringify": "^6.4.6",
+    "yargs": "^17.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

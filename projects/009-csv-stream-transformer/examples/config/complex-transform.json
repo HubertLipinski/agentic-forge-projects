@@ -1,0 +1,106 @@
+{
+  "$schema": "https://github.com/your-username/csv-stream-transformer/schemas/config.schema.json",
+  "csvParseOptions": {
+    "delimiter": ",",
+    "from_line": 2,
+    "skip_empty_lines": true
+  },
+  "csvStringifyOptions": {
+    "header": true,
+    "delimiter": "\t"
+  },
+  "filter": [
+    {
+      "column": "status",
+      "equals": "active"
+    },
+    {
+      "column": "is_deleted",
+      "not": "true"
+    }
+  ],
+  "mapping": [
+    {
+      "from": "user_id",
+      "to": "id",
+      "transform": [
+        {
+          "name": "prefix",
+          "params": [
+            "user-"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "first_name",
+      "to": "firstName",
+      "transform": [
+        {
+          "name": "trim"
+        },
+        {
+          "name": "toUpperCase"
+        }
+      ]
+    },
+    {
+      "from": "last_name",
+      "to": "lastName",
+      "transform": [
+        {
+          "name": "trim"
+        },
+        {
+          "name": "toUpperCase"
+        }
+      ]
+    },
+    {
+      "from": "email_address",
+      "to": "email",
+      "transform": [
+        {
+          "name": "toLowerCase"
+        }
+      ]
+    },
+    {
+      "from": "balance",
+      "to": "accountBalance",
+      "transform": [
+        {
+          "name": "replace",
+          "params": [
+            "$",
+            ""
+          ]
+        },
+        {
+          "name": "parseFloat"
+        },
+        {
+          "name": "toFixed",
+          "params": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "from": "notes",
+      "transform": [
+        {
+          "name": "default",
+          "params": [
+            "NO_NOTES_PROVIDED"
+          ]
+        }
+      ]
+    },
+    {
+      "from": "registration_date",
+      "to": "registeredOn"
+    }
+  ]
+}
