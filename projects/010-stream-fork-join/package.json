@@ -1,0 +1,56 @@
+{
+  "name": "stream-fork-join",
+  "version": "1.0.0",
+  "description": "A Node.js utility for forking a readable stream into multiple, independent writable streams and optionally joining them back into a single readable stream.",
+  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test",
+    "test:watch": "node --test --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "example:simple-fork": "node examples/simple-fork.js",
+    "example:fork-join": "node examples/fork-and-join.js",
+    "example:error-handling": "node examples/error-handling.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/stream-fork-join.git"
+  },
+  "keywords": [
+    "stream",
+    "fork",
+    "join",
+    "multiplex",
+    "pipeline",
+    "nodejs",
+    "backpressure",
+    "parallel",
+    "async"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/stream-fork-join/issues"
+  },
+  "homepage": "https://github.com/your-username/stream-fork-join#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "p-event": "^6.0.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-plugin-node": "^11.1.0"
+  }
+}
