@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+/**
+ * @file bin/log-aggregator
+ * @description The executable script for the Log Stream Aggregator CLI.
+ *
+ * This script is the entry point that Node.js executes when the `log-aggregator`
+ * command is run from the terminal. It imports and invokes the main CLI
+ * runner function, passing along the process arguments.
+ */
+
+// This file uses ES modules, which are enabled by `"type": "module"` in package.json.
+// Node.js v20+ has excellent support for ES modules.
+
+import { run } from '../src/cli.js';
+
+/**
+ * The main execution block.
+ * It calls the `run` function from the CLI module and handles any top-level
+ * unhandled promise rejections or uncaught exceptions that might occur
+ * outside of the application's main try/catch blocks. This ensures the
+ * process exits with a non-zero status code on unexpected failure.
+ */
+(async () => {
+  try {
+    // Pass the command-line arguments to the CLI runner.
+    // `process.argv` contains the full command, e.g., ['/usr/bin/node', '/path/to/bin/log-aggregator', '--file', 'log.txt']
+    await run(process.argv);
+  } catch (error) {
+    // This is a last-resort catch block. The `run` function in `src/cli.js`
+    // has its own robust error handling. This would only catch errors if
+    // the `run` function itself throws unexpectedly or if an unhandled
+    // rejection occurs.
+    console.error('[FATAL] An unexpected top-level error occurred:');
+    console.error(error.stack || error.message);
+    process.exit(1);
+  }
+})();
+
+// It's good practice to also listen for unhandled rejections, although
+// the async IIFE with try/catch above should handle most cases.
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('[FATAL] Unhandled Rejection at:', promise, 'reason:', reason);
+  // Application specific logging or cleanup can be done here.
+  process.exit(1);
+});

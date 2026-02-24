@@ -1,0 +1,46 @@
+{
+  "name": "log-stream-aggregator",
+  "version": "1.0.0",
+  "description": "A lightweight Node.js utility for aggregating multiple real-time log streams into a single, unified, and structured JSON output stream.",
+  "main": "src/aggregator.js",
+  "type": "module",
+  "bin": {
+    "log-aggregator": "bin/log-aggregator"
+  },
+  "scripts": {
+    "start": "node bin/log-aggregator",
+    "test": "node --test",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/log-stream-aggregator.git"
+  },
+  "keywords": [
+    "log",
+    "aggregator",
+    "stream",
+    "tail",
+    "cli",
+    "devops",
+    "monitoring",
+    "nodejs"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/log-stream-aggregator/issues"
+  },
+  "homepage": "https://github.com/your-username/log-stream-aggregator#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "pino": "^9.2.0",
+    "pino-pretty": "^11.2.1",
+    "uuid": "^10.0.0",
+    "yargs": "^17.7.2"
+  }
+}
