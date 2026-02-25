@@ -1,0 +1,48 @@
+{
+  "name": "jsdoc-to-cli",
+  "version": "1.0.0",
+  "description": "A zero-configuration CLI tool that automatically generates a command-line interface for any JavaScript function using its JSDoc comments.",
+  "main": "src/cli-runner.js",
+  "type": "module",
+  "bin": {
+    "jsdoc-to-cli": "bin/jsdoc-to-cli.js"
+  },
+  "scripts": {
+    "start": "node bin/jsdoc-to-cli.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/jsdoc-to-cli.git"
+  },
+  "keywords": [
+    "cli",
+    "jsdoc",
+    "generator",
+    "argparse",
+    "yargs",
+    "automation",
+    "npx",
+    "devtools"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/jsdoc-to-cli/issues"
+  },
+  "homepage": "https://github.com/your-username/jsdoc-to-cli#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "comment-parser": "^1.4.1",
+    "yargs-parser": "^21.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
