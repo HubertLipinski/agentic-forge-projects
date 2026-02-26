@@ -1,0 +1,44 @@
+{
+  "name": "ini-env-sync",
+  "version": "1.0.0",
+  "description": "A command-line tool for converting and synchronizing configuration files between INI and .env formats.",
+  "main": "src/cli.js",
+  "type": "module",
+  "bin": {
+    "ini-env-sync": "src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/ini-env-sync.git"
+  },
+  "keywords": [
+    "ini",
+    "env",
+    "dotenv",
+    "config",
+    "sync",
+    "converter",
+    "cli",
+    "tool",
+    "chokidar",
+    "yargs"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/ini-env-sync/issues"
+  },
+  "homepage": "https://github.com/your-username/ini-env-sync#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "ini": "^4.1.2",
+    "yargs": "^17.7.2"
+  }
+}
