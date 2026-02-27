@@ -1,0 +1,39 @@
+{
+  "name": "webhook-relay-service",
+  "version": "1.0.0",
+  "description": "A self-hostable API server to securely relay webhooks to internal services.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js | pino-pretty",
+    "test": "node --test"
+  },
+  "keywords": [
+    "webhook",
+    "relay",
+    "proxy",
+    "fastify",
+    "nodejs",
+    "api"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/webhook-relay-service.git"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.26.2",
+    "pino": "^9.0.0"
+  },
+  "devDependencies": {
+    "pino-pretty": "^11.0.0"
+  }
+}

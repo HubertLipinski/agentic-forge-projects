@@ -1,0 +1,47 @@
+{
+  "$schema": "./routes.schema.json",
+  "routes": [
+    {
+      "path": "/webhooks/github/production",
+      "targetUrl": "http://my-internal-app:8080/api/v1/hooks/github",
+      "secret": "a-very-strong-and-long-secret-key-for-github",
+      "forwardHeaders": {
+        "include": [
+          "X-GitHub-Event",
+          "X-GitHub-Delivery"
+        ]
+      },
+      "retry": {
+        "attempts": 5,
+        "initialDelay": 2000,
+        "factor": 2
+      }
+    },
+    {
+      "path": "/webhooks/stripe/payments",
+      "targetUrl": "http://192.168.1.100:9000/stripe-handler",
+      "secret": "another-secure-secret-for-stripe-webhooks-123456",
+      "forwardHeaders": {
+        "include": [
+          "Stripe-Signature"
+        ],
+        "static": {
+          "X-Relayed-From": "webhook-relay-service",
+          "Authorization": "Bearer some-static-token-for-internal-service"
+        }
+      }
+    },
+    {
+      "path": "/webhooks/simple-service",
+      "targetUrl": "http://localhost:3001/simple-hook",
+      "retry": {
+        "attempts": 1
+      }
+    },
+    {
+      "path": "/webhooks/dev/test-endpoint",
+      "targetUrl": "http://host.docker.internal:5000/receive",
+      "secret": "this-is-a-test-secret-for-development-only"
+    }
+  ]
+}
