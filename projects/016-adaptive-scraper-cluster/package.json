@@ -1,0 +1,51 @@
+{
+  "name": "adaptive-scraper-cluster",
+  "version": "1.0.0",
+  "description": "A distributed, fault-tolerant web scraping framework for Node.js.",
+  "main": "src/cli/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/cli/index.js",
+    "controller": "node bin/asc-controller",
+    "worker": "node bin/asc-worker"
+  },
+  "bin": {
+    "asc": "src/cli/index.js",
+    "asc-controller": "bin/asc-controller",
+    "asc-worker": "bin/asc-worker",
+    "asc-submit": "bin/asc-submit"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "scraper",
+    "web-scraping",
+    "crawler",
+    "distributed",
+    "cluster",
+    "fault-tolerant",
+    "nodejs",
+    "redis"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/adaptive-scraper-cluster.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/adaptive-scraper-cluster/issues"
+  },
+  "homepage": "https://github.com/your-username/adaptive-scraper-cluster#readme",
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "cheerio": "^1.0.0-rc.12",
+    "commander": "^12.0.0",
+    "dotenv": "^16.4.5",
+    "ioredis": "^5.4.1",
+    "pino": "^9.0.0",
+    "pino-pretty": "^11.0.0",
+    "undici": "^6.18.2"
+  }
+}

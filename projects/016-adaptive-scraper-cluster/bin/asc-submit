@@ -1,0 +1,194 @@
+#!/usr/bin/env node
+
+/**
+ * @fileoverview Command-line script to submit scraping jobs to the Adaptive Scraper Cluster.
+ *
+ * This script provides a user-friendly way to add new scraping tasks to the Redis job queue.
+ * It reads a job definition from a specified JSON file, validates its structure against
+ * a predefined schema, and enqueues it for processing by available worker nodes.
+ *
+ * It's designed for both single job submissions and batch submissions from a JSON array.
+ *
+ * Usage:
+ *   asc-submit <path-to-job-file.json>
+ *
+ * The script handles:
+ * - Command-line argument parsing using `commander`.
+ * - Reading and parsing the job definition file.
+ * - Validating the job(s) against the `jobSchema` or `jobBatchSchema`.
+ * - Connecting to Redis.
+ * - Pushing the validated job(s) to the appropriate Redis queue.
+ * - Providing clear feedback to the user on success or failure.
+ */
+
+import { Command } from 'commander';
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
+import { randomUUID } from 'node:crypto';
+import { createLogger, getLogger } from '../src/utils/logger.js';
+import { loadConfig } from '../src/config/index.js';
+import { validate, jobSchema, jobBatchSchema } from '../src/utils/ajv-schemas.js';
+import { getRedisClient, ensureRedisConnected, disconnectRedis } from '../src/services/redis-client.js';
+
+/**
+ * The main function that orchestrates the job submission process.
+ * It sets up logging, loads configuration, parses arguments, and handles job enqueuing.
+ *
+ * @returns {Promise<void>}
+ */
+async function main() {
+  // 1. Initial Setup: Logger and Configuration
+  // Initialize a basic logger first. It will be re-configured once the config file is loaded.
+  createLogger({ pretty: true, level: 'info' });
+  const logger = getLogger();
+
+  try {
+    // Load application configuration to get Redis settings.
+    // This is necessary to know where to connect and what queue names to use.
+    await loadConfig();
+  } catch (error) {
+    logger.fatal({ err: error }, 'Failed to load configuration. Cannot proceed with job submission.');
+    process.exit(1);
+  }
+
+  // 2. Command-Line Argument Parsing
+  const program = new Command();
+  program
+    .name('asc-submit')
+    .description('Submits a scraping job or a batch of jobs to the cluster from a JSON file.')
+    .version('1.0.0')
+    .argument('<file>', 'Path to the JSON file containing the job definition(s).')
+    .action(async (filePath) => {
+      try {
+        await submitJobs(filePath);
+        logger.info('Job submission process completed successfully.');
+      } catch (error) {
+        // Catch errors from the submission logic and log them before exiting.
+        logger.error({ err: error.message }, 'Job submission failed.');
+        process.exitCode = 1; // Set a non-zero exit code to indicate failure.
+      } finally {
+        // Ensure Redis connection is always closed cleanly.
+        await disconnectRedis();
+      }
+    });
+
+  await program.parseAsync(process.argv);
+}
+
+/**
+ * Handles the core logic of reading, validating, and enqueuing jobs.
+ *
+ * @param {string} filePath - The path to the job definition file.
+ * @returns {Promise<void>}
+ */
+async function submitJobs(filePath) {
+  const logger = getLogger();
+  const absolutePath = path.resolve(process.cwd(), filePath);
+  logger.info(`Reading job definition file from: ${absolutePath}`);
+
+  // 1. Read and Parse Job File
+  const fileContent = await readFileContent(absolutePath);
+  const jobData = JSON.parse(fileContent);
+
+  // 2. Validate and Normalize Jobs
+  const jobsToQueue = validateAndNormalizeJobs(jobData);
+  if (jobsToQueue.length === 0) {
+    throw new Error('No valid jobs found in the provided file.');
+  }
+
+  // 3. Connect to Redis
+  logger.info('Connecting to Redis to enqueue jobs...');
+  await ensureRedisConnected();
+  const redis = getRedisClient();
+
+  // 4. Enqueue Jobs
+  // Using a Redis pipeline is highly efficient for batch submissions.
+  const pipeline = redis.pipeline();
+  const jobQueueKey = `${redis.options.keyPrefix}queue:jobs`;
+
+  for (const job of jobsToQueue) {
+    const jobString = JSON.stringify(job);
+    // LPUSH adds the job to the head of the list. Workers use BRPOP to pull from the tail.
+    // This creates a FIFO (First-In, First-Out) queue.
+    // The priority is stored within the job object for potential future use with sorted sets.
+    pipeline.lpush(jobQueueKey, jobString);
+    logger.debug({ jobId: job.id, url: job.url }, 'Added job to pipeline.');
+  }
+
+  const results = await pipeline.exec();
+  const successfulSubmissions = results.filter(([err]) => !err).length;
+
+  if (successfulSubmissions !== jobsToQueue.length) {
+    const failedCount = jobsToQueue.length - successfulSubmissions;
+    logger.error({ failedCount }, 'Some jobs could not be enqueued into Redis.');
+    // Find and log specific errors
+    results.forEach(([err], index) => {
+      if (err) {
+        logger.error({ err, job: jobsToQueue[index] }, 'Failed to enqueue job.');
+      }
+    });
+    throw new Error('One or more jobs failed to be submitted to the queue.');
+  }
+
+  logger.info(`Successfully enqueued ${successfulSubmissions} job(s) into the '${jobQueueKey}' queue.`);
+}
+
+/**
+ * Reads the content of a file.
+ *
+ * @param {string} filePath - The absolute path to the file.
+ * @returns {Promise<string>} The file content as a UTF-8 string.
+ * @throws {Error} If the file cannot be read.
+ */
+async function readFileContent(filePath) {
+  try {
+    return await fs.readFile(filePath, 'utf-8');
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      throw new Error(`File not found at path: ${filePath}`);
+    }
+    throw new Error(`Error reading file: ${error.message}`);
+  }
+}
+
+/**
+ * Validates and normalizes job data from the input file.
+ * It handles both single job objects and arrays of jobs.
+ *
+ * @param {any} jobData - The parsed JSON data from the file.
+ * @returns {Array<object>} An array of validated and normalized job objects.
+ * @throws {Error} If validation fails or the data format is incorrect.
+ */
+function validateAndNormalizeJobs(jobData) {
+  const isBatch = Array.isArray(jobData);
+  const schemaId = isBatch ? jobBatchSchema.$id : jobSchema.$id;
+  const jobs = isBatch ? jobData : [jobData];
+
+  const { isValid, errors } = validate(schemaId, jobData);
+  if (!isValid) {
+    throw new Error(`Job definition validation failed: ${errors}`);
+  }
+
+  // Normalize jobs: ensure required fields like 'id' are present.
+  return jobs.map((job, index) => {
+    const normalizedJob = { ...job };
+    if (!normalizedJob.id) {
+      // Assign a unique ID if one is not provided.
+      normalizedJob.id = `${path.basename(process.argv[2], '.json')}-${index}-${randomUUID().slice(0, 8)}`;
+    }
+    return normalizedJob;
+  });
+}
+
+// Execute the main function and handle top-level unhandled errors.
+main().catch((error) => {
+  // This final catch is a safeguard for unexpected errors not caught elsewhere.
+  const logger = getLogger();
+  if (logger) {
+    logger.fatal({ err: error }, 'An unhandled error occurred during script execution.');
+  } else {
+    // Fallback if logger isn't even initialized.
+    console.error('A fatal unhandled error occurred:', error);
+  }
+  process.exit(1);
+});

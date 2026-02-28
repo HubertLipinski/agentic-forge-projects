@@ -1,0 +1,98 @@
+#!/usr/bin/env node
+
+/**
+ * @fileoverview Executable entry point for launching an Adaptive Scraper Cluster worker node.
+ *
+ * This script initializes and runs a worker process. The worker's primary role is to
+ * connect to the Redis-backed job queue, pull scraping tasks, execute them using the
+ * project's services (fetcher, parser, etc.), and report the results.
+ *
+ * It handles:
+ *  - Parsing command-line arguments (e.g., for a custom config file path).
+ *  - Initializing core services: configuration, logger, Redis client, and service managers.
+ *  - Starting the main worker loop.
+ *  - Managing graceful shutdown on process signals (SIGINT, SIGTERM).
+ */
+
+import { Command } from 'commander';
+import { resolve } from 'node:path';
+import { loadConfig } from '../src/config/index.js';
+import { createLogger, getLogger } from '../src/utils/logger.js';
+import { ensureRedisConnected, disconnectRedis } from '../src/services/redis-client.js';
+import proxyManager from '../src/services/proxy-manager.js';
+import { Worker } from '../src/cluster/worker.js';
+
+/**
+ * The main asynchronous function that sets up and runs the worker.
+ *
+ * @param {object} options - Command-line options.
+ * @param {string} [options.config] - Path to a custom configuration file.
+ */
+async function main(options) {
+  let workerInstance;
+
+  try {
+    // 1. Load configuration and initialize logger
+    const configPath = options.config ? resolve(process.cwd(), options.config) : undefined;
+    const config = loadConfig(configPath);
+    const logger = createLogger({ ...config.logging, base: { nodeType: 'worker' } });
+
+    logger.info('Starting Adaptive Scraper Cluster worker...');
+    logger.debug({ config: { ...config, proxies: `[${config.proxies?.length ?? 0} proxies]`, userAgents: `[${config.userAgents?.length ?? 0} user agents]` } }, 'Loaded configuration');
+
+    // 2. Initialize and connect to Redis
+    await ensureRedisConnected();
+    logger.info('Redis connection established.');
+
+    // 3. Initialize service managers
+    // These load their config and state after the main config and Redis are ready.
+    await proxyManager.initialize();
+
+    // 4. Create and start the worker instance
+    const workerId = `worker:${process.pid}@${(await import('node:os')).hostname()}`;
+    workerInstance = new Worker({
+      id: workerId,
+      concurrency: config.worker?.concurrency ?? 5,
+    });
+
+    // Set up graceful shutdown handler
+    const shutdown = async (signal) => {
+      logger.warn(`Received ${signal}. Shutting down worker gracefully...`);
+      if (workerInstance) {
+        await workerInstance.stop();
+      }
+      await disconnectRedis();
+      logger.info('Worker shutdown complete.');
+      process.exit(0);
+    };
+
+    process.on('SIGINT', () => shutdown('SIGINT'));
+    process.on('SIGTERM', () => shutdown('SIGTERM'));
+
+    // 5. Start the worker's main processing loop
+    await workerInstance.start();
+
+    logger.info({ workerId, concurrency: workerInstance.concurrency }, 'Worker is running and waiting for jobs.');
+
+  } catch (error) {
+    // Use getLogger() as createLogger() might not have been called if config fails
+    const logger = getLogger() || console;
+    logger.fatal({ err: error }, 'A fatal error occurred during worker startup or execution.');
+    // Ensure Redis connection is terminated on a crash
+    await disconnectRedis().catch(err => logger.error({ err }, 'Failed to disconnect Redis during fatal error shutdown.'));
+    process.exit(1);
+  }
+}
+
+// --- CLI Definition ---
+const program = new Command();
+
+program
+  .name('asc-worker')
+  .version('1.0.0')
+  .description('Launches a worker node for the Adaptive Scraper Cluster.')
+  .option('-c, --config <path>', 'Path to a custom JSON configuration file.')
+  .action(main);
+
+// Execute the CLI
+program.parse(process.argv);

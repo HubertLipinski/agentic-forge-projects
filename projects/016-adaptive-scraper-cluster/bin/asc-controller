@@ -1,0 +1,116 @@
+#!/usr/bin/env node
+
+/**
+ * @fileoverview Executable entry point for launching an Adaptive Scraper Cluster controller node.
+ *
+ * This script initializes and starts the controller component of the cluster. The controller's
+ * primary responsibilities include:
+ * - Managing the central job queue in Redis.
+ * - Monitoring the health and status of worker nodes.
+ * - Aggregating and logging cluster-wide metrics.
+ * - Providing an endpoint for new job submissions (though submission is handled by `asc-submit`).
+ * - Gracefully handling shutdown signals to ensure system state is preserved.
+ *
+ * It follows a standard initialization sequence:
+ * 1. Load and validate the application configuration.
+ * 2. Set up the centralized logger.
+ * 3. Establish a connection to the Redis server.
+ * 4. Instantiate and run the main Controller class.
+ * 5. Register signal handlers for graceful shutdown.
+ */
+
+import 'dotenv/config';
+import { program } from 'commander';
+import { loadConfig } from '../src/config/index.js';
+import { createLogger, getLogger } from '../src/utils/logger.js';
+import { ensureRedisConnected, disconnectRedis } from '../src/services/redis-client.js';
+import { Controller } from '../src/cluster/controller.js';
+
+/**
+ * The main asynchronous function that orchestrates the startup and execution of the controller node.
+ * It encapsulates the entire lifecycle of the controller process.
+ */
+async function main() {
+  let controllerInstance;
+
+  try {
+    // 1. Set up command-line interface options using 'commander'.
+    program
+      .version('1.0.0', '-v, --version', 'Output the current version')
+      .option('-c, --config <path>', 'Path to a custom JSON configuration file')
+      .parse(process.argv);
+
+    const options = program.opts();
+
+    // 2. Load and validate the application configuration.
+    // This step is critical as it provides all necessary settings for the services.
+    const config = loadConfig(options.config);
+
+    // 3. Initialize the singleton logger with settings from the config.
+    // This must be done early so all subsequent logs are captured correctly.
+    createLogger({
+      level: config.logging?.level || 'info',
+      pretty: config.logging?.pretty || false,
+      base: { nodeType: 'controller' },
+    });
+
+    const logger = getLogger();
+    logger.info('Starting Adaptive Scraper Cluster Controller...');
+    logger.debug({ config: JSON.stringify(config, null, 2) }, 'Loaded configuration');
+
+    // 4. Establish and verify the connection to Redis.
+    // The controller is entirely dependent on Redis, so we must ensure a connection
+    // before proceeding. `ensureRedisConnected` will throw if it fails.
+    await ensureRedisConnected();
+
+    // 5. Instantiate and start the controller.
+    // The Controller class contains the core logic for managing the cluster.
+    controllerInstance = new Controller();
+    await controllerInstance.start();
+
+    logger.info('Controller is running and ready to manage the cluster.');
+
+  } catch (error) {
+    // Centralized error handling for startup failures.
+    // If a logger instance exists, use it; otherwise, log to stderr.
+    const logger = getLogger() ?? console;
+    logger.fatal({ err: error }, `Failed to start controller: ${error.message}`);
+    process.exit(1);
+  }
+
+  /**
+   * Handles graceful shutdown of the controller.
+   * This function ensures that active processes are cleaned up, connections are closed,
+   * and the node exits cleanly.
+   * @param {string} signal - The name of the signal received (e.g., 'SIGINT').
+   */
+  async function gracefulShutdown(signal) {
+    const logger = getLogger();
+    logger.warn(`Received ${signal}. Initiating graceful shutdown...`);
+
+    try {
+      // Stop the controller's main loop and cleanup tasks.
+      if (controllerInstance) {
+        await controllerInstance.stop();
+      }
+
+      // Disconnect from Redis gracefully.
+      await disconnectRedis();
+
+      logger.info('Shutdown complete. Exiting.');
+      process.exit(0);
+    } catch (error) {
+      logger.error({ err: error }, 'Error during graceful shutdown. Forcing exit.');
+      process.exit(1);
+    }
+  }
+
+  // Register signal handlers to trigger the graceful shutdown sequence.
+  // SIGINT is typically sent by Ctrl+C.
+  // SIGTERM is a generic termination signal used by process managers (like Docker, PM2).
+  process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+  process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+}
+
+// Execute the main function to start the controller.
+main();
