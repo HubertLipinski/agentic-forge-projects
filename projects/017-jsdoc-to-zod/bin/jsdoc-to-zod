@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+/**
+ * @file bin/jsdoc-to-zod
+ * @description The executable script for the CLI. This file is the entry point
+ *              when the `jsdoc-to-zod` command is run in the terminal. It's
+ *              responsible for setting up the environment and invoking the
+ *              main CLI logic.
+ */
+
+// This shebang `#!/usr/bin/env node` ensures that the script is executed with
+// the Node.js interpreter available in the user's environment PATH.
+
+// The package.json `bin` field points to this file, making it the command's
+// executable target upon package installation.
+
+import { run } from '../src/cli.js';
+import kleur from 'kleur';
+
+/**
+ * The main execution wrapper.
+ * This function catches any top-level unhandled exceptions from the CLI's
+ * asynchronous operations and ensures the process exits with a non-zero
+ * status code, providing a clear error message to the user.
+ */
+async function main() {
+  try {
+    // The `run` function from `src/cli.js` contains all the yargs setup
+    // and command handling logic. We pass `process.argv` to it, which
+    // contains the command-line arguments.
+    await run(process.argv);
+  } catch (error) {
+    // This is a global catch-all for unexpected errors that might not be
+    // handled within the `run` function's own error handling (e.g., issues
+    // during module loading).
+    console.error(kleur.bold().red('\nAn unexpected error occurred.'));
+    console.error(kleur.gray(error.stack || error.message));
+    process.exit(1);
+  }
+}
+
+// Start the CLI application.
+main();
