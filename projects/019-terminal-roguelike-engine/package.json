@@ -1,0 +1,41 @@
+{
+  "name": "terminal-roguelike-engine",
+  "version": "1.0.0",
+  "description": "A pure JavaScript engine for building turn-based roguelike games that run in the terminal.",
+  "type": "module",
+  "main": "src/ecs/index.js",
+  "bin": {
+    "roguelike-engine": "bin/game.js"
+  },
+  "scripts": {
+    "start": "node bin/game.js"
+  },
+  "keywords": [
+    "roguelike",
+    "gamedev",
+    "terminal",
+    "cli",
+    "ecs",
+    "procedural-generation",
+    "nodejs"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/terminal-roguelike-engine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/terminal-roguelike-engine/issues"
+  },
+  "homepage": "https://github.com/your-username/terminal-roguelike-engine#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "nanoid": "^5.0.7",
+    "uuid": "^10.0.0",
+    "yargs": "^17.7.2"
+  }
+}
