@@ -1,0 +1,47 @@
+{
+  "name": "llm-cost-estimator",
+  "version": "1.0.0",
+  "description": "A lightweight JavaScript utility to estimate the cost of API calls to various Large Language Models (LLMs) before sending the request.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "llm-cost": "bin/cli.js"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "files": [
+    "src/",
+    "bin/",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/llm-cost-estimator.git"
+  },
+  "keywords": [
+    "llm",
+    "openai",
+    "anthropic",
+    "cost",
+    "estimator",
+    "gpt-4",
+    "claude-3",
+    "api",
+    "budget",
+    "token"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/llm-cost-estimator/issues"
+  },
+  "homepage": "https://github.com/your-username/llm-cost-estimator#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "undici": "^6.19.2",
+    "yargs": "^17.7.2"
+  }
+}
