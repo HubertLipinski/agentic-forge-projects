@@ -1,0 +1,46 @@
+{
+  "name": "cli-quick-alias",
+  "version": "1.0.0",
+  "description": "A command-line tool to quickly and safely create temporary or permanent shell aliases from your recent command history.",
+  "type": "module",
+  "main": "src/commands/create-alias.js",
+  "bin": {
+    "quick-alias": "bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/cli-quick-alias.git"
+  },
+  "keywords": [
+    "cli",
+    "shell",
+    "alias",
+    "automation",
+    "productivity",
+    "zsh",
+    "bash",
+    "fish",
+    "history",
+    "terminal"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/cli-quick-alias/issues"
+  },
+  "homepage": "https://github.com/your-username/cli-quick-alias#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "enquirer": "^2.4.1",
+    "fs-extra": "^11.2.0",
+    "yargs": "^17.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
