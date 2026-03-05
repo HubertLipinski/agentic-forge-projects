@@ -1,0 +1,44 @@
+{
+  "name": "env-template-generator",
+  "version": "1.0.0",
+  "description": "A CLI tool to automatically generate a .env.template file from environment variables found in your codebase.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "env-template-generator": "bin/cli.js",
+    "gen-env-template": "bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/env-template-generator.git"
+  },
+  "keywords": [
+    "env",
+    "dotenv",
+    "template",
+    "generator",
+    "cli",
+    "automation",
+    "environment",
+    "variables"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/env-template-generator/issues"
+  },
+  "homepage": "https://github.com/your-username/env-template-generator#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "glob": "^10.4.1",
+    "yargs": "^17.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
