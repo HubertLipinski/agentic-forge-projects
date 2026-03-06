@@ -1,0 +1,58 @@
+{
+  "name": "llm-api-sanitizer",
+  "version": "1.0.0",
+  "description": "A lightweight, zero-dependency Node.js wrapper for sanitizing inputs sent to and outputs received from Large Language Model (LLM) APIs.",
+  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "example": "node examples/openai-wrapper-example.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/llm-api-sanitizer.git"
+  },
+  "keywords": [
+    "llm",
+    "api",
+    "sanitizer",
+    "security",
+    "prompt-injection",
+    "openai",
+    "validation",
+    "wrapper",
+    "nodejs"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/llm-api-sanitizer/issues"
+  },
+  "homepage": "https://github.com/your-username/llm-api-sanitizer#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "axios": "^1.7.2",
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {},
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ]
+  }
+}
