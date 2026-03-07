@@ -1,0 +1,46 @@
+{
+  "name": "rss-feed-aggregator",
+  "version": "1.0.0",
+  "description": "A simple Node.js CLI tool and library to fetch, parse, and aggregate multiple RSS or Atom feeds into a single, chronologically sorted JSON output.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "aggregate-feeds": "src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "files": [
+    "src/",
+    "examples/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/rss-feed-aggregator.git"
+  },
+  "keywords": [
+    "rss",
+    "atom",
+    "feed",
+    "aggregator",
+    "parser",
+    "cli",
+    "json",
+    "news"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/rss-feed-aggregator/issues"
+  },
+  "homepage": "https://github.com/your-username/rss-feed-aggregator#readme",
+  "dependencies": {
+    "rss-parser": "^3.13.0",
+    "undici": "^6.19.2",
+    "yargs": "^17.7.2"
+  }
+}
