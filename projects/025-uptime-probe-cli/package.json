@@ -1,0 +1,47 @@
+{
+  "name": "uptime-probe-cli",
+  "version": "1.0.0",
+  "description": "A lightweight, zero-dependency CLI for monitoring the uptime and health of multiple HTTP endpoints.",
+  "main": "src/monitor.js",
+  "type": "module",
+  "bin": {
+    "uptime-probe": "bin/uptime-probe"
+  },
+  "scripts": {
+    "start": "node bin/uptime-probe"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "probe.yml.example",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/uptime-probe-cli.git"
+  },
+  "keywords": [
+    "cli",
+    "monitoring",
+    "uptime",
+    "health-check",
+    "devops",
+    "terminal",
+    "nodejs"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/uptime-probe-cli/issues"
+  },
+  "homepage": "https://github.com/your-username/uptime-probe-cli#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "ora": "^8.0.1",
+    "yaml": "^2.4.5",
+    "yargs-parser": "^21.1.1"
+  }
+}

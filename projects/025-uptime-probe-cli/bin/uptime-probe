@@ -1,0 +1,89 @@
+#!/usr/bin/env node
+
+import path from 'node:path';
+import yargsParser from 'yargs-parser';
+import { loadConfig } from '../src/utils/config-loader.js';
+import { startMonitoring } from '../src/monitor.js';
+import {
+  showErrorAndExit,
+  showStartMessage,
+} from '../src/utils/display.js';
+
+/**
+ * @typedef {import('../src/monitor.js').Monitor} Monitor
+ */
+
+const USAGE_MESSAGE = `
+Usage: uptime-probe [options]
+
+A lightweight CLI for monitoring the uptime and health of HTTP endpoints.
+
+Options:
+  --config, -c   Path to the YAML configuration file.
+                 (default: ./probe.yml)
+  --help, -h     Show this help message.
+  --version, -v  Show version information.
+`;
+
+/**
+ * The main entry point for the Uptime Probe CLI application.
+ *
+ * This function orchestrates the entire lifecycle of the application:
+ * 1. Parses command-line arguments.
+ * 2. Handles special flags like --help and --version.
+ * 3. Loads and validates the configuration file.
+ * 4. Initializes and starts the monitoring service.
+ * 5. Sets up a signal handler for graceful shutdown on SIGINT (Ctrl+C).
+ */
+async function main() {
+  let monitorInstance = null;
+
+  try {
+    const args = yargsParser(process.argv.slice(2), {
+      alias: { config: ['c'], help: ['h'], version: ['v'] },
+      string: ['config'],
+      boolean: ['help', 'version'],
+      default: { config: './probe.yml' },
+    });
+
+    if (args.help) {
+      console.log(USAGE_MESSAGE.trim());
+      process.exit(0);
+    }
+
+    if (args.version) {
+      // In a real project, this would be dynamically loaded from package.json
+      console.log('uptime-probe-cli version 1.0.0');
+      process.exit(0);
+    }
+
+    const configPath = path.resolve(process.cwd(), args.config);
+    const config = await loadConfig(configPath);
+
+    showStartMessage(configPath);
+
+    monitorInstance = await startMonitoring(config);
+
+    // Set up a graceful shutdown handler.
+    // The 'unref' call allows the Node.js process to exit naturally if this is
+    // the only event in the event loop (though with our timers, it won't be).
+    process.on('SIGINT', async () => {
+      // The 'monitorInstance' check handles the edge case where SIGINT is
+      // received before the monitor has finished initializing.
+      if (monitorInstance) {
+        await monitorInstance.shutdown();
+      }
+      // The process will exit after the shutdown is complete.
+      // Explicitly calling process.exit() can cut off pending async operations.
+    }).unref();
+
+  } catch (error) {
+    // The showErrorAndExit function handles formatting and process termination.
+    // We pass `true` for usage hint only on specific, user-correctable errors.
+    const showUsage = error.message.includes('Configuration file not found');
+    showErrorAndExit(error, showUsage);
+  }
+}
+
+// Execute the main function.
+main();

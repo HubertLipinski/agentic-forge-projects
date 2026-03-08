@@ -1,0 +1,51 @@
+# Uptime Probe Configuration Example
+#
+# This file defines the endpoints to monitor and the global settings for the probe.
+# Rename this file to `probe.yml` in your project root or specify its path
+# using the --config flag (e.g., `uptime-probe --config my-config.yml`).
+
+# --- Global Settings ---
+
+# The polling interval in seconds. The minimum allowed value is 5.
+# This determines how often the tool will check all endpoints.
+interval: 60
+
+# --- Endpoints to Monitor ---
+
+# A list of HTTP/HTTPS endpoints to check.
+# Each endpoint must have a unique 'name'.
+endpoints:
+  # A simple GET request to a public API.
+  - name: "Public API"
+    url: "https://api.publicapis.org/random"
+
+  # An example of a service that might be down.
+  - name: "Known Down Service"
+    url: "https://example.com/non-existent-path"
+
+  # A more complex example with custom settings.
+  - name: "Custom Health Check"
+    url: "https://httpbin.org/status/200"
+    # Optional: Specify the HTTP method (defaults to 'GET').
+    method: "GET"
+    # Optional: Set a custom request timeout in milliseconds (defaults to 10000ms).
+    timeout: 5000
+    # Optional: Add custom headers to the request.
+    headers:
+      X-Request-Source: "Uptime-Probe-CLI"
+      Accept: "application/json"
+
+  # An example of a POST request.
+  # httpbin.org/post will echo the request details in its response.
+  - name: "API POST Endpoint"
+    url: "https://httpbin.org/post"
+    method: "POST"
+    headers:
+      Content-Type: "application/json"
+
+  # An example of a slow endpoint that might time out.
+  # This endpoint is configured to delay its response by 3 seconds.
+  # We set a timeout of 2000ms, so this probe is expected to fail with a timeout error.
+  - name: "Slow Endpoint (Timeout)"
+    url: "https://httpbin.org/delay/3"
+    timeout: 2000
