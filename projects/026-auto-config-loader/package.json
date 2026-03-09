@@ -1,0 +1,52 @@
+{
+  "name": "auto-config-loader",
+  "version": "1.0.0",
+  "description": "A zero-configuration, cascading configuration loader for Node.js applications.",
+  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test"
+  },
+  "bin": {
+    "auto-config": "src/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/auto-config-loader.git"
+  },
+  "keywords": [
+    "config",
+    "configuration",
+    "loader",
+    "dotenv",
+    "yaml",
+    "json",
+    "env",
+    "environment",
+    "autoconfig",
+    "zero-config",
+    "cascading"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/auto-config-loader/issues"
+  },
+  "homepage": "https://github.com/your-username/auto-config-loader#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "js-yaml": "^4.1.0",
+    "minimist": "^1.2.8"
+  }
+}
