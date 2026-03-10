@@ -1,0 +1,49 @@
+{
+  "name": "in-process-cron",
+  "version": "1.0.0",
+  "description": "A lightweight, in-process, persistent cron job scheduler for Node.js applications with zero external dependencies.",
+  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test",
+    "example:basic": "node examples/basic-usage.js",
+    "example:dynamic": "node examples/dynamic-jobs.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/in-process-cron.git"
+  },
+  "keywords": [
+    "cron",
+    "scheduler",
+    "job",
+    "task",
+    "schedule",
+    "cronjob",
+    "persistent",
+    "background",
+    "node"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/in-process-cron/issues"
+  },
+  "homepage": "https://github.com/your-username/in-process-cron#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "cron-parser": "^4.9.0",
+    "proper-lockfile": "^4.1.2",
+    "uuid": "^9.0.1"
+  },
+  "files": [
+    "src/",
+    "README.md"
+  ]
+}
