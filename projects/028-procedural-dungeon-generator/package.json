@@ -1,0 +1,47 @@
+{
+  "name": "procedural-dungeon-generator",
+  "version": "1.0.0",
+  "description": "A zero-dependency Node.js library for creating procedural 2D tile-based dungeons.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "generate-dungeon": "bin/visualize.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "visualize": "node bin/visualize.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/procedural-dungeon-generator.git"
+  },
+  "keywords": [
+    "dungeon",
+    "generator",
+    "procedural",
+    "roguelike",
+    "gamedev",
+    "map",
+    "bsp",
+    "p-content"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/procedural-dungeon-generator/issues"
+  },
+  "homepage": "https://github.com/your-username/procedural-dungeon-generator#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "files": [
+    "src/",
+    "bin/",
+    "README.md"
+  ],
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "yargs": "^17.7.2"
+  }
+}
