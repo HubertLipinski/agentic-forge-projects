@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+/**
+ * @fileoverview
+ * This is the executable entry point for the `markdown-graph-builder` CLI.
+ *
+ * Its sole purpose is to import and run the main CLI logic from `src/cli.js`.
+ * This separation keeps the executable file minimal and clean, while all the
+ * complex command-line parsing and application logic resides in the `src` directory.
+ *
+ * The shebang `#!/usr/bin/env node` ensures that this script is executed with
+ * the Node.js interpreter available in the user's environment.
+ */
+
+import { main } from '../src/cli.js';
+
+// The `main` function from `src/cli.js` handles all command-line parsing,
+// option handling, and execution logic. We simply invoke it here.
+// Any errors, including unhandled promise rejections, will be caught
+// within `main`, which controls the process exit code.
+main();
