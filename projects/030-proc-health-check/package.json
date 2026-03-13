@@ -1,0 +1,45 @@
+{
+  "name": "process-health-checker",
+  "version": "1.0.0",
+  "description": "A lightweight, zero-dependency Node.js library to monitor the health of a running process by its PID.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "health-check": "bin/cli.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/process-health-checker.git"
+  },
+  "keywords": [
+    "process",
+    "monitor",
+    "health",
+    "pid",
+    "cpu",
+    "memory",
+    "uptime",
+    "cli"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/process-health-checker/issues"
+  },
+  "homepage": "https://github.com/your-username/process-health-checker#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md"
+  ],
+  "dependencies": {
+    "commander": "^12.1.0"
+  }
+}
