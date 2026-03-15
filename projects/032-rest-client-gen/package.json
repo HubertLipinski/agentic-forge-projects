@@ -1,0 +1,46 @@
+{
+  "name": "rest-client-generator",
+  "version": "1.0.0",
+  "description": "A CLI tool that generates a ready-to-use JavaScript client for any RESTful API based on a simple JSON configuration file.",
+  "main": "src/cli.js",
+  "type": "module",
+  "bin": {
+    "rest-client-gen": "bin/rest-client-gen"
+  },
+  "scripts": {
+    "start": "node src/cli.js"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/rest-client-generator.git"
+  },
+  "keywords": [
+    "api",
+    "rest",
+    "client",
+    "generator",
+    "codegen",
+    "cli",
+    "node",
+    "fetch"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/rest-client-generator/issues"
+  },
+  "homepage": "https://github.com/your-username/rest-client-generator#readme",
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "fs-extra": "^11.2.0",
+    "mustache": "^4.2.0",
+    "yargs": "^17.7.2"
+  }
+}

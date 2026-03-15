@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+
+/**
+ * @file bin/rest-client-gen
+ * @description The executable file that Node.js runs for the CLI command.
+ * This script is the entry point for the 'rest-client-gen' command. It simply
+ * imports and runs the main CLI logic from 'src/cli.js'.
+ *
+ * The `#!/usr/bin/env node` shebang line ensures that this script is executed
+ * with the Node.js interpreter, making it a runnable command in a Unix-like
+ * environment after being installed globally or via an npm script.
+ */
+
+// Import the main function from the CLI module.
+// The main function is responsible for parsing arguments and orchestrating the generation process.
+import { main } from '../src/cli.js';
+
+/**
+ * An immediately-invoked async function expression (IIAFE) to start the application.
+ * This modern pattern allows the use of top-level await in a clean and contained way.
+ * It passes the command-line arguments directly to the main CLI handler.
+ */
+(async () => {
+  try {
+    // `process.argv` contains the full command-line invocation.
+    // e.g., ['/usr/bin/node', '/path/to/bin/rest-client-gen', 'config.json', '-o', 'client.js']
+    // The `main` function, using yargs' `hideBin`, will correctly handle these arguments.
+    await main(process.argv);
+  } catch (error) {
+    // This is a top-level catch block for any unhandled exceptions that might
+    // bubble up from the application. The main CLI logic in `src/cli.js` has its
+    // own detailed error handling, so this should ideally not be reached.
+    // However, it serves as a final safety net.
+    console.error('An unexpected fatal error occurred. The application will now exit.');
+    console.error(error);
+    process.exit(1);
+  }
+})();

@@ -1,0 +1,75 @@
+{
+  "$schema": "../src/config/schema.json",
+  "clientClassName": "GitHubApiClient",
+  "baseUrl": "https://api.github.com",
+  "defaultHeaders": {
+    "Accept": "application/vnd.github.v3+json",
+    "X-GitHub-Api-Version": "2022-11-28"
+  },
+  "endpoints": {
+    "getUser": {
+      "method": "GET",
+      "path": "/users/:username",
+      "description": "Retrieves public information for a specific GitHub user."
+    },
+    "listUserRepos": {
+      "method": "GET",
+      "path": "/users/:username/repos",
+      "description": "Lists public repositories for the specified user.",
+      "queryParams": [
+        "type",
+        "sort",
+        "direction",
+        "per_page",
+        "page"
+      ]
+    },
+    "getRepo": {
+      "method": "GET",
+      "path": "/repos/:owner/:repo",
+      "description": "Fetches a specific repository."
+    },
+    "listRepoIssues": {
+      "method": "GET",
+      "path": "/repos/:owner/:repo/issues",
+      "description": "Lists issues for a repository.",
+      "queryParams": [
+        "milestone",
+        "state",
+        "assignee",
+        "creator",
+        "mentioned",
+        "labels",
+        "sort",
+        "direction",
+        "since",
+        "per_page",
+        "page"
+      ]
+    },
+    "createIssue": {
+      "method": "POST",
+      "path": "/repos/:owner/:repo/issues",
+      "description": "Creates a new issue in a repository.",
+      "body": true
+    },
+    "updateIssue": {
+      "method": "PATCH",
+      "path": "/repos/:owner/:repo/issues/:issue_number",
+      "description": "Updates an existing issue.",
+      "body": true
+    },
+    "searchRepositories": {
+      "method": "GET",
+      "path": "/search/repositories",
+      "description": "Searches for repositories via various criteria.",
+      "queryParams": [
+        "q",
+        "sort",
+        "order",
+        "per_page",
+        "page"
+      ]
+    }
+  }
+}

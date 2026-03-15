@@ -1,0 +1,64 @@
+/**
+   * {{#description}}
+   * {{description}}
+   * {{/description}}
+   * {{^description}}
+   * Sends a {{httpMethod}} request to the {{rawPath}} endpoint.
+   * {{/description}}
+   *
+   * @param {object} [params={}] - The parameters for the request.
+   * {{#allParams}}
+   * @param {{{{type}}}} [params.{{name}}] - {{description}}
+   * {{/allParams}}
+   * @param {RequestInit} [fetchOptions={}] - Optional additional fetch options to override defaults for this request.
+   * @returns {Promise<any>} A promise that resolves with the response data.
+   * @throws {ApiError} If the request fails.
+   */
+  async {{methodName}}(params = {}, fetchOptions = {}) {
+    const { {{#allParams}}{{name}}{{^isLast}}, {{/isLast}}{{/allParams}} } = params;
+    {{#hasPathParams}}
+
+    // Path parameters
+    const pathParams = { {{#pathParams}}{{name}}{{^isLast}}, {{/isLast}}{{/pathParams}} };
+    let path = `{{rawPath}}`;
+    for (const [key, value] of Object.entries(pathParams)) {
+      if (value === undefined || value === null) {
+        throw new Error(`Path parameter "${key}" for {{methodName}} must be provided.`);
+      }
+      path = path.replace(`:${key}`, encodeURIComponent(String(value)));
+    }
+    {{/hasPathParams}}
+    {{^hasPathParams}}
+    const path = `{{rawPath}}`;
+    {{/hasPathParams}}
+    {{#hasQueryParams}}
+
+    // Query parameters
+    const queryParams = { {{#queryParams}}{{name}}{{^isLast}}, {{/isLast}}{{/queryParams}} };
+    const searchParams = new URLSearchParams();
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined && value !== null) {
+        if (Array.isArray(value)) {
+          value.forEach(v => searchParams.append(key, v));
+        } else {
+          searchParams.set(key, String(value));
+        }
+      }
+    }
+    const queryString = searchParams.toString();
+    const fullPath = queryString ? `${path}?${queryString}` : path;
+    {{/hasQueryParams}}
+    {{^hasQueryParams}}
+    const fullPath = path;
+    {{/hasQueryParams}}
+
+    const requestOptions = {
+      ...fetchOptions,
+      method: '{{httpMethod}}',
+      {{#hasBody}}
+      body: JSON.stringify(body),
+      {{/hasBody}}
+    };
+
+    return this.#request(fullPath, requestOptions);
+  }
