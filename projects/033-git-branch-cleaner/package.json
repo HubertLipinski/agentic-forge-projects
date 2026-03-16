@@ -1,0 +1,43 @@
+{
+  "name": "git-branch-cleaner",
+  "version": "1.0.0",
+  "description": "A command-line tool to find and interactively delete stale or merged local Git branches.",
+  "main": "src/cli.js",
+  "type": "module",
+  "bin": {
+    "git-clean-branches": "src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js"
+  },
+  "keywords": [
+    "git",
+    "cli",
+    "tool",
+    "branch",
+    "cleanup",
+    "stale",
+    "merged",
+    "developer-tools"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/git-branch-cleaner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/git-branch-cleaner/issues"
+  },
+  "homepage": "https://github.com/your-username/git-branch-cleaner#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "date-fns": "^3.6.0",
+    "inquirer": "^9.3.5",
+    "shelljs": "^0.8.5"
+  }
+}
