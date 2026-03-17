@@ -1,0 +1,37 @@
+{
+  "name": "git-worktree-organizer",
+  "version": "1.0.0",
+  "description": "A command-line utility to simplify the management of Git worktrees.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "gwo": "bin/gwo.js"
+  },
+  "scripts": {
+    "start": "node bin/gwo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/git-worktree-organizer.git"
+  },
+  "keywords": [
+    "git",
+    "worktree",
+    "cli",
+    "developer-tools",
+    "productivity"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "inquirer": "^9.3.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
