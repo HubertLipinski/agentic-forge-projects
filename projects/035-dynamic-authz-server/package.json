@@ -1,0 +1,57 @@
+{
+  "name": "dynamic-authorization-server",
+  "version": "1.0.0",
+  "description": "A standalone, policy-driven authorization API server that decouples authorization logic from your core application services. It provides a central point for managing complex access control rules (RBAC, ABAC) via a simple JSON-based policy language and a high-performance REST API.",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js | pino-pretty",
+    "test": "tap",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "keywords": [
+    "authorization",
+    "authentication",
+    "authz",
+    "authn",
+    "rbac",
+    "abac",
+    "policy",
+    "engine",
+    "access-control",
+    "security",
+    "microservices",
+    "fastify",
+    "json-logic"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/dynamic-authorization-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/dynamic-authorization-server/issues"
+  },
+  "homepage": "https://github.com/your-username/dynamic-authorization-server#readme",
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^3.0.1",
+    "fastify": "^4.26.2",
+    "json-logic-js": "^2.0.2",
+    "pino": "^8.20.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "pino-pretty": "^11.0.0",
+    "prettier": "^3.2.5",
+    "tap": "^18.7.3"
+  }
+}
