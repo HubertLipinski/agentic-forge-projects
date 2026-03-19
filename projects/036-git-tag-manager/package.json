@@ -1,0 +1,46 @@
+{
+  "name": "git-tag-manager",
+  "version": "1.0.0",
+  "description": "A CLI for bulk managing Git tags based on semantic versioning rules.",
+  "type": "module",
+  "main": "bin/cli.js",
+  "bin": {
+    "gtm": "bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "lib/"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/git-tag-manager.git"
+  },
+  "keywords": [
+    "git",
+    "tags",
+    "semver",
+    "cli",
+    "automation",
+    "devops",
+    "repository-management"
+  ],
+  "author": "Your Name <your-email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/git-tag-manager/issues"
+  },
+  "homepage": "https://github.com/your-username/git-tag-manager#readme",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "execa": "^8.0.1",
+    "inquirer": "^9.2.20",
+    "semver": "^7.6.2",
+    "yargs": "^17.7.2"
+  }
+}
