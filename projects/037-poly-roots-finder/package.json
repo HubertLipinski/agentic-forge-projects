@@ -1,0 +1,55 @@
+{
+  "name": "polynomial-roots-finder",
+  "version": "1.0.0",
+  "description": "A zero-dependency Node.js library for finding the real and complex roots of polynomials.",
+  "main": "lib/index.js",
+  "type": "module",
+  "bin": {
+    "poly-roots": "bin/cli.js"
+  },
+  "scripts": {
+    "start": "node lib/index.js",
+    "test": "mocha",
+    "test:watch": "mocha --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/polynomial-roots-finder.git"
+  },
+  "keywords": [
+    "polynomial",
+    "roots",
+    "math",
+    "algebra",
+    "numerical",
+    "analysis",
+    "durand-kerner",
+    "complex",
+    "numbers",
+    "calculus",
+    "solver"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/polynomial-roots-finder/issues"
+  },
+  "homepage": "https://github.com/your-username/polynomial-roots-finder#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "files": [
+    "lib/",
+    "bin/",
+    "README.md"
+  ],
+  "dependencies": {
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.4.0"
+  }
+}
