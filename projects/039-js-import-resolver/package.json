@@ -1,0 +1,45 @@
+{
+  "name": "js-import-resolver",
+  "version": "1.0.0",
+  "description": "A command-line tool that analyzes a Node.js project to find and fix broken ES module imports.",
+  "type": "module",
+  "main": "src/cli.js",
+  "bin": {
+    "resolve-imports": "bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/js-import-resolver.git"
+  },
+  "keywords": [
+    "esm",
+    "imports",
+    "modules",
+    "refactor",
+    "lint",
+    "cli",
+    "nodejs",
+    "codemod"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "fast-glob": "^3.3.2",
+    "levenshtein-edit-distance": "^3.0.1",
+    "picocolors": "^1.0.1",
+    "yargs": "^17.7.2"
+  }
+}
