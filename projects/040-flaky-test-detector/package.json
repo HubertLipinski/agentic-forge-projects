@@ -1,0 +1,43 @@
+{
+  "name": "flaky-test-detector",
+  "version": "1.0.0",
+  "description": "A CLI tool to identify flaky tests by running a test suite multiple times.",
+  "main": "src/main.js",
+  "type": "module",
+  "bin": {
+    "flaky-test-detector": "bin/flaky-test-detector.js"
+  },
+  "scripts": {
+    "start": "node bin/flaky-test-detector.js"
+  },
+  "keywords": [
+    "test",
+    "flaky",
+    "jest",
+    "mocha",
+    "ci",
+    "testing",
+    "reliability",
+    "automation"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/flaky-test-detector.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/flaky-test-detector/issues"
+  },
+  "homepage": "https://github.com/your-username/flaky-test-detector#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "enquirer": "^2.4.1",
+    "fast-glob": "^3.3.2",
+    "ora": "^8.0.1",
+    "yargs": "^17.7.2"
+  }
+}

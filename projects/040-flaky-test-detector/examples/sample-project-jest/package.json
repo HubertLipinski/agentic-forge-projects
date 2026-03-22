@@ -1,0 +1,21 @@
+{
+  "name": "sample-project-jest",
+  "version": "1.0.0",
+  "description": "A sample project with stable, flaky, and failing tests to demonstrate the flaky-test-detector tool.",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "test:ci": "jest --ci --runInBand"
+  },
+  "keywords": [
+    "jest",
+    "sample",
+    "flaky",
+    "test"
+  ],
+  "author": "Flaky Test Detector Example",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
