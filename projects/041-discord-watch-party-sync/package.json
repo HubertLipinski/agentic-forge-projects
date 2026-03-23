@@ -1,0 +1,37 @@
+{
+  "name": "discord-watch-party-sync-bot",
+  "version": "1.0.0",
+  "description": "A Discord bot that synchronizes YouTube video playback for users in a voice channel, creating a seamless co-watching experience.",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "deploy": "node deploy-commands.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/discord-watch-party-sync-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "youtube",
+    "watch-party",
+    "sync",
+    "music",
+    "discord.js"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "ISC",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@discordjs/voice": "^0.17.0",
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "pino": "^9.2.0",
+    "pino-pretty": "^11.2.1",
+    "ytdl-core": "^4.11.5"
+  }
+}
