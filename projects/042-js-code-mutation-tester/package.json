@@ -1,0 +1,48 @@
+{
+  "name": "js-mutation-tester",
+  "version": "1.0.0",
+  "description": "A CLI tool that performs mutation testing on a JavaScript codebase to improve the quality and robustness of test suites.",
+  "type": "module",
+  "main": "src/cli.js",
+  "bin": {
+    "mutate": "bin/mutate.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js"
+  },
+  "keywords": [
+    "mutation-testing",
+    "testing",
+    "javascript",
+    "nodejs",
+    "quality-assurance",
+    "qa",
+    "ast",
+    "babel",
+    "cli"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/js-mutation-tester.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/js-mutation-tester/issues"
+  },
+  "homepage": "https://github.com/your-username/js-mutation-tester#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@babel/generator": "^7.24.7",
+    "@babel/parser": "^7.24.7",
+    "@babel/traverse": "^7.24.7",
+    "chokidar": "^3.6.0",
+    "diff": "^5.2.0",
+    "glob": "^10.4.2",
+    "ora": "^8.0.1",
+    "picocolors": "^1.0.1",
+    "yargs": "^17.7.2"
+  }
+}
