@@ -1,0 +1,57 @@
+{
+  "name": "resilient-session-scraper",
+  "version": "1.0.0",
+  "description": "An advanced Node.js library for web scraping that maintains session integrity across requests. It automatically manages cookies, CSRF tokens, and referer headers, making it ideal for scraping complex, stateful websites.",
+  "main": "index.js",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./session": "./lib/session.js",
+    "./plugins": {
+      "base": "./lib/plugins/base-plugin.js",
+      "proxy": "./lib/plugins/proxy-manager.js"
+    }
+  },
+  "files": [
+    "lib/",
+    "index.js",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test",
+    "lint": "eslint .",
+    "docs": "jsdoc -c jsdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/resilient-session-scraper.git"
+  },
+  "keywords": [
+    "scraper",
+    "web-scraping",
+    "session",
+    "cookies",
+    "csrf",
+    "undici",
+    "cheerio",
+    "automation",
+    "nodejs"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/resilient-session-scraper/issues"
+  },
+  "homepage": "https://github.com/your-username/resilient-session-scraper#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "p-retry": "^6.2.0",
+    "tough-cookie": "^4.1.4",
+    "undici": "^6.19.2",
+    "user-agents": "^1.1.262"
+  }
+}
