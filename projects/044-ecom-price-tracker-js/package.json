@@ -1,0 +1,45 @@
+{
+  "name": "e-commerce-price-tracker-js",
+  "version": "1.0.0",
+  "description": "A distributed, headless scraper for tracking product prices and stock availability across e-commerce sites.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "track-prices": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "example": "node examples/run-scraper.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/e-commerce-price-tracker-js.git"
+  },
+  "keywords": [
+    "scraper",
+    "headless",
+    "price-tracker",
+    "e-commerce",
+    "nodejs",
+    "undici",
+    "cheerio",
+    "proxy",
+    "automation"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/e-commerce-price-tracker-js/issues"
+  },
+  "homepage": "https://github.com/your-username/e-commerce-price-tracker-js#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "cheerio": "^1.0.0-rc.12",
+    "js-yaml": "^4.1.0",
+    "p-queue": "^8.0.1",
+    "undici": "^6.18.2"
+  }
+}

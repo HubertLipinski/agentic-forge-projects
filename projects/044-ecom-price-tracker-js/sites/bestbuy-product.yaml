@@ -1,0 +1,45 @@
+# sites/bestbuy-product.yaml
+#
+# Configuration for scraping product pages on BestBuy.com.
+# Note: E-commerce site structures change. These selectors are based on a
+# snapshot in time and may need updates for long-term reliability. They serve
+# as a robust example for a site configuration file.
+
+name: "Best Buy"
+
+# This regex matches standard Best Buy product page URLs.
+# Example: https://www.bestbuy.com/site/sony-wh1000xm4-wireless-noise-cancelling-over-the-ear-headphones-black/6408356.p?skuId=6408356
+# It looks for the pattern `/site/some-product-name/SKU.p?skuId=SKU`.
+urlPattern: "^https?://(?:www\\.)?bestbuy\\.com/site/.+/\\d+\\.p\\?skuId=\\d+.*$"
+
+# Selectors for extracting key product information.
+selectors:
+  # Product Name/Title
+  # The product title is typically located in an H1 element within a specific div.
+  name:
+    selector: ".sku-title h1"
+    method: "text"
+
+  # Product Price
+  # Best Buy's price is usually in a div with a specific data-testid.
+  # The price itself is in a child element with the class `.sr-only` for screen readers,
+  # which often contains the cleanest text (e.g., "$299.99").
+  price:
+    selector: "div[data-testid='customer-price'] .priceView-hero-price span"
+    method: "text"
+
+  # Stock Availability
+  # The "Add to Cart" button is a reliable indicator of stock. We check its text content.
+  # The button usually has a specific data-track attribute and type.
+  stock:
+    selector: ".add-to-cart-button"
+    method: "text"
+
+# Rules for interpreting the text extracted by the 'stock' selector.
+stock:
+  # A list of phrases that, if found in the button text, indicate the product is available.
+  # The check is case-insensitive.
+  inStockStrings:
+    - "Add to Cart"
+    - "Add to Package" # For bundles
+    - "Check Stores" # Indicates it might be available for pickup

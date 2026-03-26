@@ -1,0 +1,50 @@
+# sites/amazon-product.yaml
+#
+# Configuration for scraping product pages on Amazon.
+# Note: Amazon's HTML structure is complex and changes frequently. These selectors
+# are based on a snapshot in time and may require updates to work reliably.
+# They are intended as a high-quality example of how to structure a site config.
+
+name: "Amazon"
+
+# This regex is designed to match common Amazon product URL formats across different
+# top-level domains (.com, .co.uk, .de, etc.). It captures URLs with /dp/ or /gp/product/
+# followed by the ASIN (Amazon Standard Identification Number).
+urlPattern: "^https?://(?:www\\.)?amazon\\.[a-z.]+/.*(?:/dp/|/gp/product/)([A-Z0-9]{10}).*$"
+
+# Selectors for extracting key product information.
+selectors:
+  # Product Name/Title
+  # #productTitle is the primary ID for the main product title on the page.
+  name:
+    selector: "#productTitle"
+    method: "text"
+
+  # Product Price
+  # Amazon's price can be in several places. This list provides fallbacks.
+  # 1. `.a-price .a-offscreen`: The standard price format, often visually hidden but accessible.
+  # 2. `#price_inside_buybox`: Price shown within the main "buy box".
+  # 3. `#corePrice_feature_div .a-price-whole`: The main integer part of the price.
+  # We use a CSS selector list to try them in order until one matches.
+  price:
+    selector: ".a-price .a-offscreen, #price_inside_buybox, #corePrice_feature_div .a-price-whole"
+    method: "text"
+
+  # Stock Availability
+  # #availability contains the primary stock status message. We extract the text
+  # from this container to check against our `inStockStrings`.
+  stock:
+    selector: "#availability"
+    method: "text"
+
+# Rules for interpreting the text extracted by the 'stock' selector.
+stock:
+  # A list of phrases that indicate the product is available.
+  # The check is case-insensitive. If any of these substrings are found in the
+  # text from the '#availability' element, the product is considered in stock.
+  inStockStrings:
+    - "In Stock"
+    - "Only a few left"
+    - "Available from these sellers"
+    - "Arrives" # Often used for items with a delivery date, implying stock.
+    - "Add to Cart" # Sometimes the button text is the only indicator.

@@ -1,0 +1,6 @@
+[
+  "http://user1:pass1@proxy.example.com:8080",
+  "http://user2:pass2@proxy.example.com:8081",
+  "http://proxy.example.org:9000",
+  "https://user3:pass3@secureproxy.example.net:443"
+]
