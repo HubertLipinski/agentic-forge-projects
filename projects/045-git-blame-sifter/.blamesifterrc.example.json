@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json.schemastore.org/blamesifterrc",
+  "//": "This is an example configuration file for Git Blame Sifter.",
+  "//": "You can place a `.blamesifterrc.json` file in your project's root directory.",
+  "//": "Configuration is loaded with the following precedence: CLI flags > Environment Variables > .blamesifterrc.json > Defaults.",
+
+  "//": "--- Rule Configuration ---",
+  "//": "These options define the rules for identifying 'trivial' commits.",
+
+  "commitMessage": "^(chore|style|refactor|test|build|ci)(\\(.+\\))?:",
+  "//": "A case-insensitive regex pattern to match against the commit summary (the first line of the commit message).",
+  "//": "Commits with a matching summary will be considered trivial.",
+  "//": "Example: Matches conventional commits like 'chore: format code' or 'style(lint): fix indentation'.",
+
+  "ignoreAuthors": [
+    "lint-bot",
+    "formatter-bot@users.noreply.github.com",
+    "dependabot[bot]"
+  ],
+  "//": "A list of author names or emails to always treat as trivial.",
+  "//": "The check is case-insensitive. Useful for filtering out automated commits from bots.",
+
+  "isTrivial": true,
+  "//": "Enables or disables the advanced diff-based triviality check.",
+  "//": "When `true`, the tool will perform a line-by-line diff for a commit's changes.",
+  "//": "If the changes are determined to be purely cosmetic (whitespace, blank lines), the commit is marked as trivial.",
+  "//": "This is a powerful but potentially slower rule. Set to `false` to disable it.",
+
+
+  "//": "--- File Matching ---",
+  "//": "Control which files are included or excluded from analysis using glob patterns.",
+
+  "include": [
+    "src/**/*.js",
+    "lib/**/*.js"
+  ],
+  "//": "An array of glob patterns for files to include in the analysis.",
+  "//": "If not specified, it defaults to all files.",
+
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/__snapshots__/**",
+    "**/*.min.js",
+    "**/package-lock.json",
+    "**/yarn.lock",
+    "**/pnpm-lock.yaml"
+  ],
+  "//": "An array of glob patterns for files to exclude from the analysis.",
+  "//": "This is useful for ignoring generated files, build artifacts, or lockfiles.",
+
+
+  "//": "--- Output & Behavior ---",
+  "//": "Customize the output format and runtime behavior of the tool.",
+
+  "format": "standard",
+  "//": "The output format for the sifted blame results.",
+  "//": "Available options: 'standard' (human-readable, like git blame), 'json' (machine-readable), 'summary' (author contribution report).",
+
+  "show-progress": true,
+  "//": "Display a spinner/progress indicator during long-running operations like parsing and history walking.",
+  "//": "Set to `false` to disable, which is useful in non-interactive or CI environments.",
+
+  "interactive": false,
+  "//": "Enable interactive mode. The tool will pause and ask for confirmation before sifting a commit identified as trivial.",
+  "//": "This allows for manual review and override of the rule engine's decisions.",
+
+
+  "//": "--- Advanced Git Options ---",
+
+  "blame-args": "--ignore-revs-file .git-blame-ignore-revs",
+  "//": "A string of additional arguments to pass directly to the underlying `git blame` command.",
+  "//": "This allows for advanced git features, like using a `.git-blame-ignore-revs` file to skip specific commits.",
+  "//": "Example: '--ignore-whitespace -w'"
+}

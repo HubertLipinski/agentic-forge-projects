@@ -1,0 +1,51 @@
+{
+  "name": "git-blame-sifter",
+  "version": "1.0.0",
+  "description": "An advanced CLI tool to analyze git blame output, filtering out trivial commits to find the true authors of code.",
+  "type": "module",
+  "main": "src/commands/sift.js",
+  "bin": {
+    "git-blame-sifter": "bin/git-blame-sifter.js",
+    "sift": "bin/git-blame-sifter.js"
+  },
+  "scripts": {
+    "start": "node bin/git-blame-sifter.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/git-blame-sifter.git"
+  },
+  "keywords": [
+    "git",
+    "blame",
+    "cli",
+    "refactoring",
+    "code-analysis",
+    "developer-tool",
+    "node",
+    "yargs"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "diff": "^5.2.0",
+    "minimist": "^1.2.8",
+    "ora": "^8.0.1",
+    "picomatch": "^4.0.1",
+    "yargs": "^17.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    ".blamesifterrc.example.json"
+  ]
+}
