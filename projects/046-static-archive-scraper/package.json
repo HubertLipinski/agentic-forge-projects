@@ -1,0 +1,40 @@
+{
+  "name": "static-archive-scraper",
+  "version": "1.0.0",
+  "description": "A command-line tool to scrape and archive static websites for offline viewing.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "static-archive": "bin/archive.js"
+  },
+  "scripts": {
+    "start": "node bin/archive.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/static-archive-scraper.git"
+  },
+  "keywords": [
+    "scraper",
+    "crawler",
+    "archiver",
+    "static-site",
+    "offline",
+    "cli"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/static-archive-scraper/issues"
+  },
+  "homepage": "https://github.com/your-username/static-archive-scraper#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cheerio": "^1.0.0-rc.12",
+    "yargs": "^17.7.2"
+  }
+}
