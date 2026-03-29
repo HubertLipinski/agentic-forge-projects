@@ -1,0 +1,46 @@
+{
+  "name": "npm-dependency-grapher",
+  "version": "1.0.0",
+  "description": "A CLI tool that scans a JavaScript project's `package.json` and `node_modules` to build an accurate, interactive dependency graph.",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "dep-grapher": "bin/dep-grapher"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "npm",
+    "dependencies",
+    "graph",
+    "dependency-graph",
+    "dependency-hell",
+    "visualization",
+    "graphviz",
+    "dot",
+    "node_modules",
+    "cli",
+    "monorepo",
+    "semver"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/npm-dependency-grapher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/npm-dependency-grapher/issues"
+  },
+  "homepage": "https://github.com/your-username/npm-dependency-grapher#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "glob": "^10.4.1",
+    "graphviz": "^0.1.0",
+    "semver": "^7.6.2"
+  }
+}

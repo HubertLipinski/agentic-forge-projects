@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+/**
+ * @file bin/dep-grapher
+ * @description The executable entry point for the npm-dependency-grapher CLI tool.
+ *              This script is linked by npm's `bin` configuration in `package.json`.
+ *              It handles basic environment setup, uncaught error handling, and
+ *              invokes the main application logic from `src/index.js`.
+ */
+
+// Import the main application logic.
+// The '../src/index.js' path is relative to 'bin/dep-grapher'.
+import { main } from '../src/index.js';
+import logger from '../src/utils/logger.js';
+
+/**
+ * An IIFE (Immediately Invoked Function Expression) to start the application.
+ * This allows us to use top-level `await` and provides a clean scope for the entry point.
+ */
+(async () => {
+  try {
+    // Set up a global handler for uncaught exceptions to provide a clean exit.
+    process.on('uncaughtException', (error) => {
+      logger.error('An unexpected error occurred:', error.message);
+      if (logger.getLevel() === 'debug') {
+        console.error(error.stack);
+      }
+      logger.error('The application will now exit.');
+      process.exit(1);
+    });
+
+    // Set up a handler for unhandled promise rejections.
+    process.on('unhandledRejection', (reason, promise) => {
+      logger.error('An unhandled promise rejection occurred:');
+      if (reason instanceof Error) {
+        logger.error(reason.message);
+        if (logger.getLevel() === 'debug') {
+          console.error(reason.stack);
+        }
+      } else {
+        logger.error(reason);
+      }
+      // In future Node.js versions, unhandled rejections will terminate the process.
+      // We exit with a non-zero code to signal failure.
+      process.exit(1);
+    });
+
+    // Execute the main application logic, passing command-line arguments.
+    // `process.argv` includes `node` and the script path, so we slice them off.
+    await main(process.argv.slice(2));
+
+  } catch (error) {
+    // Catch any synchronous errors during the initial setup or main execution.
+    // The main function itself should handle its own errors, but this is a safeguard.
+    logger.error('A critical error occurred during execution:', error.message);
+    if (logger.getLevel() === 'debug') {
+        console.error(error.stack);
+    }
+    process.exit(1);
+  }
+})();
