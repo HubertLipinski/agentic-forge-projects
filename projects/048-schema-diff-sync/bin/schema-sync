@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+/**
+ * @file bin/schema-sync
+ * @description The executable script for the schema-diff-sync CLI.
+ *
+ * This script is the entry point for the `schema-sync` command. It uses a
+ * shebang to be executed directly by Node.js. Its sole responsibility is to
+ * import and execute the main CLI application logic located in `src/cli/index.js`.
+ *
+ * This separation keeps the executable file minimal and clean, while all the
+ * complex command parsing and application orchestration is handled in the
+ * main application source code.
+ */
+
+// The 'import' statement is used here to load and execute the main CLI module.
+// The ES module loader will handle the rest of the application's lifecycle.
+import '../src/cli/index.js';

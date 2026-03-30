@@ -1,0 +1,134 @@
+{
+  "users": {
+    "columns": {
+      "id": {
+        "type": "int",
+        "nullable": false,
+        "autoIncrement": true,
+        "primary": true
+      },
+      "username": {
+        "type": "varchar(50)",
+        "nullable": false,
+        "unique": true
+      },
+      "email": {
+        "type": "varchar(255)",
+        "nullable": false,
+        "unique": true
+      },
+      "password_hash": {
+        "type": "varchar(255)",
+        "nullable": false
+      },
+      "is_active": {
+        "type": "tinyint(1)",
+        "nullable": false,
+        "default": "1"
+      },
+      "created_at": {
+        "type": "timestamp",
+        "nullable": false,
+        "default": "CURRENT_TIMESTAMP"
+      },
+      "updated_at": {
+        "type": "timestamp",
+        "nullable": false,
+        "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+      }
+    },
+    "indexes": {
+      "PRIMARY": {
+        "columns": ["id"],
+        "primary": true
+      },
+      "users_email_idx": {
+        "columns": ["email"],
+        "unique": true
+      },
+      "users_username_idx": {
+        "columns": ["username"],
+        "unique": true
+      }
+    }
+  },
+  "posts": {
+    "columns": {
+      "id": {
+        "type": "int",
+        "nullable": false,
+        "autoIncrement": true,
+        "primary": true
+      },
+      "user_id": {
+        "type": "int",
+        "nullable": false
+      },
+      "title": {
+        "type": "varchar(255)",
+        "nullable": false
+      },
+      "content": {
+        "type": "text",
+        "nullable": true
+      },
+      "published_at": {
+        "type": "datetime",
+        "nullable": true,
+        "default": null
+      },
+      "created_at": {
+        "type": "timestamp",
+        "nullable": false,
+        "default": "CURRENT_TIMESTAMP"
+      }
+    },
+    "indexes": {
+      "PRIMARY": {
+        "columns": ["id"],
+        "primary": true
+      },
+      "posts_user_id_idx": {
+        "columns": ["user_id"],
+        "unique": false
+      }
+    }
+  },
+  "comments": {
+    "columns": {
+      "id": {
+        "type": "bigint",
+        "nullable": false,
+        "autoIncrement": true,
+        "primary": true
+      },
+      "post_id": {
+        "type": "int",
+        "nullable": false
+      },
+      "author_id": {
+        "type": "int",
+        "nullable": false
+      },
+      "body": {
+        "type": "text",
+        "nullable": false
+      },
+      "created_at": {
+        "type": "timestamp",
+        "nullable": false,
+        "default": "CURRENT_TIMESTAMP"
+      }
+    },
+    "indexes": {
+      "PRIMARY": {
+        "columns": ["id"],
+        "primary": true
+      },
+      "comments_post_id_author_id_idx": {
+        "columns": ["post_id", "author_id"],
+        "unique": false
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "schema-diff-sync",
+  "version": "0.1.0",
+  "description": "A declarative, stateful schema synchronization tool for PostgreSQL and MySQL.",
+  "type": "module",
+  "main": "src/cli/index.js",
+  "bin": {
+    "schema-sync": "bin/schema-sync"
+  },
+  "scripts": {
+    "start": "node src/cli/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/schema-diff-sync.git"
+  },
+  "keywords": [
+    "database",
+    "schema",
+    "migration",
+    "sync",
+    "declarative",
+    "postgresql",
+    "mysql",
+    "devops",
+    "automation",
+    "iac",
+    "dbops"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/schema-diff-sync/issues"
+  },
+  "homepage": "https://github.com/your-username/schema-diff-sync#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "mysql2": "^3.10.1",
+    "pg": "^8.12.0",
+    "yargs": "^17.7.2"
+  }
+}

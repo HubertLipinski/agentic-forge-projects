@@ -1,0 +1,119 @@
+# This is an example schema definition file for a PostgreSQL database.
+# It demonstrates how to declare tables, columns, indexes, and constraints
+# in a declarative way for the schema-diff-sync tool.
+
+# The top-level keys are table names.
+users:
+  columns:
+    # A primary key column, often an auto-incrementing integer.
+    # 'primary: true' is a hint for the DDL generator to create a primary key constraint.
+    # The default value uses a sequence, a common pattern in PostgreSQL.
+    id:
+      type: serial
+      primary: true
+      nullable: false
+
+    # A unique, non-nullable text column for user emails.
+    # 'unique: true' is a hint that can be used to generate a UNIQUE constraint or index.
+    email:
+      type: varchar(255)
+      nullable: false
+      unique: true
+
+    # A non-nullable text column for hashed passwords.
+    password_hash:
+      type: varchar(255)
+      nullable: false
+
+    # An optional text column for a user's full name.
+    # 'nullable: true' is the default, so it can be omitted.
+    full_name:
+      type: varchar(255)
+      nullable: true
+
+    # A boolean flag with a default value.
+    is_active:
+      type: boolean
+      nullable: false
+      default: true
+
+    # Timestamp columns with default values.
+    # 'now()' is a PostgreSQL function to get the current timestamp.
+    created_at:
+      type: timestamp with time zone
+      nullable: false
+      default: now()
+    updated_at:
+      type: timestamp with time zone
+      nullable: false
+      default: now()
+
+  # Defines indexes and constraints for the table.
+  indexes:
+    # The primary key constraint. Naming it explicitly is good practice.
+    # The 'primary: true' flag distinguishes it from a regular unique index.
+    users_pkey:
+      columns: [id]
+      primary: true
+
+    # A unique index on the email column to enforce uniqueness and speed up lookups.
+    users_email_key:
+      columns: [email]
+      unique: true
+
+    # A non-unique index on the 'is_active' column for filtering performance.
+    idx_users_is_active:
+      columns: [is_active]
+      unique: false
+
+posts:
+  columns:
+    id:
+      type: serial
+      primary: true
+      nullable: false
+
+    # Foreign key relationship to the 'users' table.
+    # The tool will create the column, but foreign key constraints are not yet
+    # managed by this version of schema-diff-sync. This is a placeholder
+    # to show how one would define the column itself.
+    author_id:
+      type: integer
+      nullable: false
+
+    title:
+      type: varchar(255)
+      nullable: false
+
+    # A column for long-form text content.
+    content:
+      type: text
+      nullable: true
+
+    # A column to demonstrate JSON data types in PostgreSQL.
+    metadata:
+      type: jsonb
+      nullable: true
+      default: '{}' # Default to an empty JSON object
+
+    published_at:
+      type: timestamp with time zone
+      nullable: true
+
+    created_at:
+      type: timestamp with time zone
+      nullable: false
+      default: now()
+
+  indexes:
+    posts_pkey:
+      columns: [id]
+      primary: true
+
+    # Index on the foreign key column to improve join performance.
+    idx_posts_author_id:
+      columns: [author_id]
+
+    # A composite index on author and creation date for complex queries.
+    idx_posts_author_created:
+      columns: [author_id, created_at]
