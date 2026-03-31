@@ -1,0 +1,62 @@
+[
+  {
+    "productId": "prod-001",
+    "name": "Eco-Friendly Water Bottle",
+    "description": "A 24oz reusable water bottle made from recycled materials. Keep your drinks cold for 24 hours or hot for 12.",
+    "price": 24.99,
+    "currency": "USD",
+    "stock": 150,
+    "category": "Kitchen & Dining",
+    "tags": ["reusable", "eco-friendly", "drinkware"],
+    "inStock": true,
+    "launchDate": "2023-03-15T00:00:00Z"
+  },
+  {
+    "productId": "prod-002",
+    "name": "Wireless Noise-Cancelling Headphones",
+    "description": "Immerse yourself in sound with these high-fidelity, over-ear headphones. 30-hour battery life.",
+    "price": 199.95,
+    "currency": "USD",
+    "stock": 75,
+    "category": "Electronics",
+    "tags": ["audio", "headphones", "bluetooth"],
+    "inStock": true,
+    "launchDate": "2023-05-20T00:00:00Z"
+  },
+  {
+    "productId": "prod-003",
+    "name": "Organic Cotton T-Shirt",
+    "description": "A soft, breathable t-shirt made from 100% GOTS-certified organic cotton. Unisex fit.",
+    "price": 29.50,
+    "currency": "USD",
+    "stock": 300,
+    "category": "Apparel",
+    "tags": ["clothing", "organic", "unisex"],
+    "inStock": true,
+    "launchDate": "2023-01-10T00:00:00Z"
+  },
+  {
+    "productId": "prod-004",
+    "name": "Smart LED Desk Lamp",
+    "description": "A modern desk lamp with adjustable brightness and color temperature. Controllable via app.",
+    "price": 59.99,
+    "currency": "USD",
+    "stock": 0,
+    "category": "Home Office",
+    "tags": ["lighting", "smart-home", "desk"],
+    "inStock": false,
+    "launchDate": "2023-04-01T00:00:00Z"
+  },
+  {
+    "productId": "prod-005",
+    "name": "Gourmet Dark Chocolate Bar",
+    "description": "A 72% cacao dark chocolate bar with sea salt. Ethically sourced from single-origin beans.",
+    "price": 5.99,
+    "currency": "USD",
+    "stock": 500,
+    "category": "Groceries",
+    "tags": ["food", "chocolate", "gourmet", "snack"],
+    "inStock": true,
+    "launchDate": "2022-11-01T00:00:00Z"
+  }
+]

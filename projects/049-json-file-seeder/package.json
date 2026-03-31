@@ -1,0 +1,43 @@
+{
+  "name": "json-file-seeder",
+  "version": "1.0.0",
+  "description": "A lightweight, zero-dependency CLI tool for seeding a database with data from JSON files.",
+  "type": "module",
+  "main": "src/cli.js",
+  "bin": {
+    "json-file-seeder": "bin/seed.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js"
+  },
+  "keywords": [
+    "seeder",
+    "database",
+    "json",
+    "cli",
+    "mongodb",
+    "postgres",
+    "postgresql",
+    "seed",
+    "data"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/json-file-seeder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/json-file-seeder/issues"
+  },
+  "homepage": "https://github.com/your-username/json-file-seeder#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "mongodb": "^6.5.0",
+    "pg": "^8.11.5",
+    "yargs-parser": "^21.1.1"
+  }
+}

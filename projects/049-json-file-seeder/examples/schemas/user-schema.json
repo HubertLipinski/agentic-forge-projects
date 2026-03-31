@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "User",
+  "description": "Schema for a user object in the system.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique identifier for a user.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "firstName": {
+      "description": "The user's first name.",
+      "type": "string",
+      "minLength": 1
+    },
+    "lastName": {
+      "description": "The user's last name.",
+      "type": "string",
+      "minLength": 1
+    },
+    "email": {
+      "description": "The user's email address.",
+      "type": "string",
+      "format": "email"
+    },
+    "status": {
+      "description": "The current status of the user's account.",
+      "type": "string",
+      "enum": ["active", "inactive", "pending"]
+    },
+    "createdAt": {
+      "description": "The ISO 8601 timestamp when the user account was created.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id",
+    "firstName",
+    "lastName",
+    "email",
+    "status",
+    "createdAt"
+  ],
+  "additionalProperties": false
+}
