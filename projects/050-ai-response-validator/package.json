@@ -1,0 +1,64 @@
+{
+  "name": "ai-response-validator",
+  "version": "1.0.0",
+  "description": "A Node.js library for validating Large Language Model (LLM) responses against a specified format or schema, with automatic retry and repair capabilities.",
+  "main": "index.js",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./lib/validator": "./lib/validator.js",
+    "./lib/strategies/json-validator": "./lib/strategies/json-validator.js",
+    "./lib/strategies/xml-validator": "./lib/strategies/xml-validator.js",
+    "./lib/strategies/regex-validator": "./lib/strategies/regex-validator.js"
+  },
+  "files": [
+    "lib",
+    "index.js",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test",
+    "test:watch": "node --test --watch",
+    "test:coverage": "node --test --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "docs": "jsdoc -c jsdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/ai-response-validator.git"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "validation",
+    "validator",
+    "schema",
+    "json",
+    "xml",
+    "regex",
+    "openai",
+    "anthropic",
+    "gemini",
+    "structured-output",
+    "retry",
+    "repair"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/ai-response-validator/issues"
+  },
+  "homepage": "https://github.com/your-username/ai-response-validator#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "dotenv": "^16.4.5",
+    "fast-xml-parser": "^4.3.6",
+    "p-limit": "^5.0.0",
+    "undici": "^6.18.2"
+  }
+}
