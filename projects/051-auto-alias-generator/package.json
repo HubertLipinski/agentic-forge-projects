@@ -1,0 +1,46 @@
+{
+  "name": "auto-alias",
+  "version": "1.0.0",
+  "description": "A CLI tool that scans your shell history to suggest optimized aliases for your most frequent commands.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "auto-alias": "bin/auto-alias"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "cli",
+    "terminal",
+    "shell",
+    "alias",
+    "automation",
+    "productivity",
+    "zsh",
+    "bash",
+    "fish",
+    "developer-tools"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/auto-alias.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/auto-alias/issues"
+  },
+  "homepage": "https://github.com/your-username/auto-alias#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "inquirer": "^9.3.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

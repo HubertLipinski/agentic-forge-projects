@@ -1,0 +1,120 @@
+#!/usr/bin/env node
+
+/**
+ * @fileoverview Executable script for the Auto Alias Generator CLI.
+ * This file is the entry point for the `auto-alias` command. It uses `commander`
+ * to parse command-line arguments and orchestrates the main application flow by
+ * calling the core logic from `src/index.js`.
+ *
+ * It defines the CLI interface, including options for customizing the scan,
+ * and handles top-level errors to provide user-friendly feedback.
+ */
+
+import { Command } from 'commander';
+import chalk from 'chalk';
+import { run } from '../src/index.js';
+import { DEFAULT_CONFIG, APP_NAME } from '../src/utils/constants.js';
+
+// Dynamically import package.json to read the version and description.
+// Using an assertion to ensure it's treated as JSON.
+import pkg from '../package.json' with { type: 'json' };
+
+/**
+ * The main function that sets up and executes the CLI.
+ * It defines the command, options, and action handler.
+ */
+async function main() {
+  const program = new Command();
+
+  program
+    .name(APP_NAME)
+    .version(pkg.version, '-v, --version', 'Display the version number')
+    .description(pkg.description)
+    .option(
+      '-l, --limit <number>',
+      `Number of recent history lines to scan.`,
+      (value) => {
+        const parsed = parseInt(value, 10);
+        if (isNaN(parsed) || parsed <= 0) {
+          console.error(chalk.red('Error: --limit must be a positive number.'));
+          process.exit(1);
+        }
+        return parsed;
+      },
+      DEFAULT_CONFIG.limit
+    )
+    .option(
+      '-f, --min-frequency <number>',
+      'Minimum number of times a command must appear to be suggested.',
+      (value) => {
+        const parsed = parseInt(value, 10);
+        if (isNaN(parsed) || parsed < 2) {
+          console.error(chalk.red('Error: --min-frequency must be a number greater than 1.'));
+          process.exit(1);
+        }
+        return parsed;
+      },
+      DEFAULT_CONFIG.minFrequency
+    )
+    .option(
+      '-a, --alias-length <number>',
+      'Preferred length for generated aliases.',
+      (value) => {
+        const parsed = parseInt(value, 10);
+        if (isNaN(parsed) || parsed < 2) {
+          console.error(chalk.red('Error: --alias-length must be a number greater than 1.'));
+          process.exit(1);
+        }
+        return parsed;
+      },
+      DEFAULT_CONFIG.aliasLength
+    )
+    .option(
+      '-n, --num-suggestions <number>',
+      'Number of top alias suggestions to display.',
+      (value) => {
+        const parsed = parseInt(value, 10);
+        if (isNaN(parsed) || parsed <= 0) {
+          console.error(chalk.red('Error: --num-suggestions must be a positive number.'));
+          process.exit(1);
+        }
+        return parsed;
+      },
+      DEFAULT_CONFIG.numSuggestions
+    )
+    .option(
+      '-p, --file-path <path>',
+      'Explicitly provide a path to a shell history file.'
+    )
+    .option(
+      '--non-interactive',
+      'Run in non-interactive mode. Prints all suggestions without a prompt.'
+    )
+    .action(async (options) => {
+      try {
+        // The `run` function contains the main application logic.
+        // It's separated from the CLI parsing for better testability and modularity.
+        await run(options);
+      } catch (error) {
+        // Centralized error handling for the entire application flow.
+        // This catches errors from file reading, parsing, or any other part of the process.
+        console.error(chalk.red.bold('\nAn unexpected error occurred:'));
+        console.error(chalk.red(error.message));
+        // For debugging, you might want to log the full stack trace:
+        // console.error(error.stack);
+        process.exit(1);
+      }
+    });
+
+  // Parse the command-line arguments and trigger the action.
+  await program.parseAsync(process.argv);
+}
+
+// Execute the main function.
+// The .catch() here is a final safety net, although the `main` function's
+// internal try/catch should handle most application-level errors.
+main().catch((error) => {
+  console.error(chalk.red.bold('\nA critical failure occurred in the CLI setup:'));
+  console.error(chalk.red(error.message));
+  process.exit(1);
+});
