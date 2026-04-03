@@ -1,0 +1,58 @@
+{
+  "name": "http-mock-recorder",
+  "version": "1.0.0",
+  "description": "A zero-configuration CLI and programmatic tool that records and replays HTTP interactions for fast, deterministic, and offline-capable Node.js tests.",
+  "main": "src/orchestrator.js",
+  "type": "module",
+  "bin": {
+    "http-mock-recorder": "bin/http-mock-recorder.js"
+  },
+  "scripts": {
+    "start": "node bin/http-mock-recorder.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "http",
+    "mock",
+    "record",
+    "replay",
+    "nock",
+    "test",
+    "testing",
+    "integration",
+    "api",
+    "fixture",
+    "vcr",
+    "jest",
+    "mocha",
+    "ava"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/http-mock-recorder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/http-mock-recorder/issues"
+  },
+  "homepage": "https://github.com/your-username/http-mock-recorder#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "chokidar": "^3.6.0",
+    "glob": "^10.4.1",
+    "nock": "^14.0.0-beta.5",
+    "yargs": "^17.7.2"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
