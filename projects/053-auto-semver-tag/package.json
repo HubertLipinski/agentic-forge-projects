@@ -1,0 +1,47 @@
+{
+  "name": "auto-semver-tagger",
+  "version": "1.0.0",
+  "description": "A CLI utility that automates Semantic Versioning for Git repositories by analyzing Conventional Commits.",
+  "main": "src/main.js",
+  "type": "module",
+  "bin": {
+    "auto-semver-tag": "bin/auto-semver-tag.js"
+  },
+  "scripts": {
+    "start": "node bin/auto-semver-tag.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/auto-semver-tagger.git"
+  },
+  "keywords": [
+    "semver",
+    "git",
+    "conventional-commits",
+    "automation",
+    "versioning",
+    "tagging",
+    "changelog",
+    "cli"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "conventional-commits-parser": "^5.0.0",
+    "execa": "^8.0.1",
+    "semver": "^7.6.2",
+    "yargs": "^17.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "bin/",
+    "src/"
+  ]
+}
