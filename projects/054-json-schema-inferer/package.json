@@ -1,0 +1,47 @@
+{
+  "name": "json-schema-inferer",
+  "version": "1.0.0",
+  "description": "A zero-dependency Node.js utility that automatically generates a draft JSON Schema from a sample JSON object or an array of JSON objects.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "infer-schema": "bin/infer-schema.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test",
+    "test:watch": "node --test --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/json-schema-inferer.git"
+  },
+  "keywords": [
+    "json",
+    "schema",
+    "inference",
+    "generator",
+    "validation",
+    "cli",
+    "nodejs"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/json-schema-inferer/issues"
+  },
+  "homepage": "https://github.com/your-username/json-schema-inferer#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "commander": "^12.1.0"
+  }
+}
