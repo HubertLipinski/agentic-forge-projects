@@ -1,0 +1,47 @@
+{
+  "name": "pg-schema-snapshot",
+  "version": "1.0.0",
+  "description": "A lightweight, zero-dependency CLI tool for capturing and comparing snapshots of a PostgreSQL database schema.",
+  "type": "module",
+  "main": "src/schema-extractor.js",
+  "bin": {
+    "pg-schema-snapshot": "bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "src/"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/pg-schema-snapshot.git"
+  },
+  "keywords": [
+    "postgresql",
+    "postgres",
+    "pg",
+    "schema",
+    "snapshot",
+    "diff",
+    "database",
+    "cli",
+    "devops",
+    "dba"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/pg-schema-snapshot/issues"
+  },
+  "homepage": "https://github.com/your-username/pg-schema-snapshot#readme",
+  "dependencies": {
+    "deep-diff": "^1.0.2",
+    "pg": "^8.11.5",
+    "yargs": "^17.7.2"
+  }
+}
