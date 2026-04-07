@@ -1,0 +1,57 @@
+{
+  "name": "stream-router-js",
+  "version": "1.0.0",
+  "description": "A lightweight Node.js library for routing data from a single readable stream to multiple writable streams based on content-based rules.",
+  "main": "index.js",
+  "type": "module",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "lib",
+    "index.js",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test",
+    "test:watch": "node --test --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "docs": "jsdoc -c jsdoc.json",
+    "example:log-splitter": "node examples/log-splitter.js",
+    "example:iot-telemetry": "node examples/iot-telemetry-router.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/stream-router-js.git"
+  },
+  "keywords": [
+    "stream",
+    "router",
+    "pipeline",
+    "nodejs",
+    "data-processing",
+    "etl",
+    "jsonpath",
+    "regex",
+    "backpressure",
+    "streaming"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/stream-router-js/issues"
+  },
+  "homepage": "https://github.com/your-username/stream-router-js#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "jsonpath-plus": "^7.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
