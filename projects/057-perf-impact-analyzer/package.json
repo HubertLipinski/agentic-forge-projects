@@ -1,0 +1,45 @@
+{
+  "name": "performance-impact-analyzer",
+  "version": "1.0.0",
+  "description": "A CLI tool that analyzes the performance impact of code changes in a Git repository by comparing benchmark results between two Git refs.",
+  "type": "module",
+  "main": "src/orchestrator.js",
+  "bin": {
+    "perf-impact-analyzer": "bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js"
+  },
+  "keywords": [
+    "performance",
+    "benchmark",
+    "testing",
+    "cli",
+    "ci",
+    "cd",
+    "git",
+    "regression",
+    "devops"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/performance-impact-analyzer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/performance-impact-analyzer/issues"
+  },
+  "homepage": "https://github.com/your-username/performance-impact-analyzer#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "ora": "^8.0.1",
+    "shelljs": "^0.8.5",
+    "strip-ansi": "^7.1.0",
+    "table": "^6.8.2",
+    "yargs": "^17.7.2"
+  }
+}

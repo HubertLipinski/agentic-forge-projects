@@ -1,0 +1,18 @@
+{
+  "benchmarkCommand": "node examples/basic-benchmark/benchmark.js",
+  "runs": 5,
+  "failOnRegression": true,
+  "regressionThreshold": -5.0,
+  "metrics": [
+    {
+      "name": "CPU (ops/sec)",
+      "unit": "ops/sec",
+      "regex": "Fibonacci Calculation: (\\d+\\.?\\d*) ops\\/sec"
+    },
+    {
+      "name": "I/O Latency (p99)",
+      "unit": "ms",
+      "regex": "Simulated I/O Latency: (\\d+\\.?\\d*) ms \\(p99\\)"
+    }
+  ]
+}
