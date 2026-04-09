@@ -1,0 +1,45 @@
+{
+  "name": "mem-leak-sentinel",
+  "version": "1.0.0",
+  "description": "A simple, embeddable memory leak detector for long-running Node.js applications.",
+  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "start": "node src/index.js",
+    "example:basic": "node examples/basic-usage.js",
+    "example:express": "node examples/express-server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/mem-leak-sentinel.git"
+  },
+  "keywords": [
+    "memory",
+    "leak",
+    "detector",
+    "sentinel",
+    "monitoring",
+    "heap",
+    "nodejs",
+    "dev-tools",
+    "profiling"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/mem-leak-sentinel/issues"
+  },
+  "homepage": "https://github.com/your-username/mem-leak-sentinel#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {}
+}
