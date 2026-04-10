@@ -1,0 +1,50 @@
+name: 'Auto PR Merger'
+description: 'Automatically merges pull requests that meet a configurable set of criteria.'
+author: 'Your Name'
+
+# Branding for the GitHub Marketplace
+branding:
+  icon: 'git-merge'
+  color: 'purple'
+
+# Define the inputs for the action
+inputs:
+  # The GITHUB_TOKEN is required for API authentication.
+  # It's passed implicitly by the GitHub Actions runner, but we define it here for clarity
+  # and to allow users to pass a different token if needed (e.g., a PAT).
+  token:
+    description: 'GitHub token for authenticating with the API. Defaults to ${{ github.token }}.'
+    required: true
+    default: ${{ github.token }}
+
+  # Path to the configuration file that defines the merge rules.
+  config-path:
+    description: 'Path to the auto-merge configuration file (e.g., .github/auto-merge.yml).'
+    required: true
+    default: '.github/auto-merge.yml'
+
+  # Dry-run mode to preview actions without merging.
+  dry-run:
+    description: 'If true, the action will log which PRs would be merged but will not perform the merge.'
+    required: false
+    default: 'false'
+
+  # Concurrency setting to control API usage.
+  concurrency:
+    description: 'The number of pull requests to process concurrently to avoid API rate limits.'
+    required: false
+    default: '5'
+
+# Define the outputs of the action
+outputs:
+  merged_count:
+    description: 'The number of pull requests that were successfully merged.'
+  skipped_count:
+    description: 'The number of pull requests that were skipped (did not match rules).'
+  failed_count:
+    description: 'The number of pull requests that failed to merge due to an API error.'
+
+# Define how the action runs
+runs:
+  using: 'node20'
+  main: 'index.js'

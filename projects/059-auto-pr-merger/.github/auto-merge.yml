@@ -1,0 +1,86 @@
+# .github/auto-merge.yml
+# -----------------------------------------------------------------------------
+# Example Configuration for Auto PR Merger
+#
+# This file defines the rules for automatically merging pull requests.
+# The tool processes rules in the order they are defined. The first rule
+# that matches a pull request will be applied, and no further rules will be
+# evaluated for that PR.
+#
+# For full documentation, visit:
+# https://github.com/your-username/auto-pr-merger#configuration
+# -----------------------------------------------------------------------------
+
+# The 'rules' key is mandatory and must contain an array of rule objects.
+rules:
+  # Rule 1: Automatically merge pull requests from Dependabot.
+  # This is a common use case for automating dependency updates.
+  - when:
+      # Match PRs created by the 'dependabot[bot]' user.
+      # The 'author:' prefix is used to specify an author pattern.
+      - "author:dependabot[bot]"
+      # You can also match based on labels. For example, if you have a
+      # workflow that labels all dependency PRs.
+      # - "label:dependencies"
+    # Merge strategy: Use 'squash' to keep the commit history clean.
+    # This is a good practice for dependency updates.
+    merge: squash
+    # Checks policy: 'stable' is recommended. It ensures all required checks
+    # have passed, while allowing non-required, informational checks (like
+    # code coverage reports) to be 'skipped' or 'neutral'.
+    checks: stable
+
+  # Rule 2: Merge minor fixes or documentation updates automatically.
+  # This rule uses labels to identify PRs that are safe to merge.
+  - when:
+      # Match PRs that have the 'auto-merge' label.
+      # The 'label:' prefix is used to specify a required label.
+      - "label:auto-merge"
+      # You can require multiple labels. The PR must have ALL specified labels.
+      # For example, to merge only if it's also a documentation change:
+      # - "label:documentation"
+    # Merge strategy: Use 'merge' to create a merge commit. This preserves
+    # the original commit history of the feature branch.
+    merge: merge
+    # Checks policy: 'all' is stricter. It requires every single CI check
+    # to have a 'success' conclusion. Use this if you want to be absolutely
+    * sure that no check was skipped.
+    checks: all
+
+  # Rule 3: Automatically merge hotfixes into the main branch from a 'hotfix/*' branch.
+  # This rule demonstrates branch-based matching.
+  - when:
+      # Match PRs where the head branch matches 'hotfix/*' and the base branch
+      # is 'main'. The format is 'head<-base'. Wildcards (*) are supported.
+      - "branch:hotfix/*<-main"
+    # Merge strategy: Use 'rebase' to maintain a linear history on the main branch.
+    # This can be useful for release branches.
+    merge: rebase
+    # Use the default 'stable' checks policy. If 'checks' is omitted, 'stable' is used.
+
+  # Rule 4: Merge contributions from a trusted core contributor.
+  # This allows bypassing manual review for trusted individuals.
+  - when:
+      # Match PRs from a specific author.
+      - "author:core-contributor-username"
+      # And require a specific label to prevent accidental merges.
+      - "label:ready-to-merge"
+    # Use the default 'merge' strategy. If 'merge' is omitted, 'merge' is used.
+    # Use the default 'stable' checks policy.
+
+  # Rule 5: A more complex rule for feature branches from trusted authors.
+  # This shows how multiple condition types can be combined. The PR must match
+  # at least one of the specified 'when' conditions.
+  # In this example, it must be from a trusted author AND have the 'feature' label.
+  # However, the logic is that a PR matches if it satisfies ANY of the specified
+  # condition types (author, label, or branch). If you specify multiple label
+  # conditions, it must have ALL of them.
+  - when:
+      # This rule will trigger if the author is 'another-trusted-dev'
+      - "author:another-trusted-dev"
+      # AND the PR has the 'approved-feature' label.
+      - "label:approved-feature"
+      # AND the PR is targeting the 'develop' branch.
+      - "branch:*<-develop"
+    merge: squash
+    checks: stable

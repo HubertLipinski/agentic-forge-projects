@@ -1,0 +1,44 @@
+{
+  "name": "auto-pr-merger",
+  "version": "1.0.0",
+  "description": "A GitHub Action and CLI tool to automatically merge pull requests that meet a set of configurable criteria.",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "auto-pr-merger": "bin/auto-pr-merger.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/auto-pr-merger.git"
+  },
+  "keywords": [
+    "github",
+    "actions",
+    "automation",
+    "merge",
+    "pull-request",
+    "dependabot",
+    "cli"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/auto-pr-merger/issues"
+  },
+  "homepage": "https://github.com/your-username/auto-pr-merger#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "js-yaml": "^4.1.0",
+    "minimatch": "^9.0.4",
+    "octokit": "^3.2.1",
+    "p-queue": "^8.0.1",
+    "yargs": "^17.7.2"
+  }
+}
