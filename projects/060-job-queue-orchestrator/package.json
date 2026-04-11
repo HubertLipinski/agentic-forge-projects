@@ -1,0 +1,38 @@
+{
+  "name": "job-queue-orchestrator",
+  "version": "1.0.0",
+  "description": "A standalone, RESTful API server for orchestrating distributed, long-running jobs.",
+  "main": "src/index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "job-queue",
+    "task-queue",
+    "background-jobs",
+    "orchestrator",
+    "fastify",
+    "nodejs"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/job-queue-orchestrator.git"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^3.0.1",
+    "fastify": "^4.26.2",
+    "nanoid": "^5.0.7",
+    "pino": "^9.0.0",
+    "pino-pretty": "^11.0.0",
+    "undici": "^6.18.2"
+  }
+}
