@@ -1,0 +1,60 @@
+{
+  "name": "matrix-transform-engine",
+  "version": "1.0.0",
+  "description": "A pure JavaScript library for creating and composing 2D affine transformation matrices in Node.js.",
+  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "require": "./src/index.js"
+    }
+  },
+  "files": [
+    "src/",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/matrix-transform-engine.git"
+  },
+  "keywords": [
+    "matrix",
+    "2d",
+    "affine",
+    "transform",
+    "transformation",
+    "geometry",
+    "graphics",
+    "animation",
+    "nodejs"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/matrix-transform-engine/issues"
+  },
+  "homepage": "https://github.com/your-username/matrix-transform-engine#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "transform": {},
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/utils/constants.js"
+    ]
+  }
+}
