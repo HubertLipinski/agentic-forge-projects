@@ -1,0 +1,45 @@
+{
+  "name": "basic-auth-obfuscator",
+  "version": "1.0.0",
+  "description": "A CLI tool and library for securing HTTP Basic Authentication credentials by encrypting 'user:pass' strings into a single, opaque token.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "auth-obfuscator": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/basic-auth-obfuscator.git"
+  },
+  "keywords": [
+    "basic-auth",
+    "authentication",
+    "security",
+    "encryption",
+    "cli",
+    "devops",
+    "secrets",
+    "credentials"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/basic-auth-obfuscator/issues"
+  },
+  "homepage": "https://github.com/your-username/basic-auth-obfuscator#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "yargs": "^17.7.2"
+  }
+}
