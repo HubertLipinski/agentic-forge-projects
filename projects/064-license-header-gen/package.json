@@ -1,0 +1,43 @@
+{
+  "name": "license-header-generator",
+  "version": "1.0.0",
+  "description": "A lightweight, zero-dependency CLI tool to automatically add or update license headers in source files.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "license-header-generator": "bin/cli.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/license-header-generator.git"
+  },
+  "keywords": [
+    "license",
+    "header",
+    "generator",
+    "cli",
+    "automation",
+    "copyright",
+    "open-source",
+    "compliance"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/license-header-generator/issues"
+  },
+  "homepage": "https://github.com/your-username/license-header-generator#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "yargs-parser": "^21.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
