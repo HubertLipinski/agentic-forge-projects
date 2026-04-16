@@ -1,0 +1,193 @@
+#!/usr/bin/env node
+
+/**
+ * @file bin/vector-stats
+ * @description The main command-line executable for Vector Stats JS.
+ *
+ * This script uses the 'commander' library to create a powerful and user-friendly
+ * command-line interface. It allows users to perform statistical calculations on
+ * numerical data provided via a file or standard input (stdin). The script
+ * orchestrates data parsing, calculation execution, and formatted output.
+ */
+
+import { Command } from 'commander';
+import { parseData } from '../src/cli/parser.js';
+import * as stats from '../src/index.js';
+import { isValidAndNotEmpty } from '../src/utils/validation.js';
+import { createRequire } from 'node:module';
+
+// Use createRequire to import package.json, which is a CJS-style JSON file.
+const require = createRequire(import.meta.url);
+const { version, description } = require('../package.json');
+
+/**
+ * Formats a numerical result for display.
+ * Handles NaN, Infinity, and arrays (for mode).
+ *
+ * @param {number | number[]} result - The calculation result.
+ * @param {number} precision - The number of decimal places to round to.
+ * @returns {string} The formatted string representation of the result.
+ */
+const formatResult = (result, precision) => {
+  if (Array.isArray(result)) {
+    return result.length > 0 ? result.join(', ') : 'N/A';
+  }
+  if (typeof result !== 'number' || !Number.isFinite(result)) {
+    return 'N/A';
+  }
+  return result.toFixed(precision);
+};
+
+/**
+ * Defines and executes a single statistical calculation command.
+ *
+ * @param {Command} program - The main commander program instance.
+ * @param {object} config - Configuration for the command.
+ * @param {string} config.name - The name of the command (e.g., 'mean').
+ * @param {string} config.description - The description for the command's help text.
+ * @param {Function} config.func - The statistical function to execute.
+ */
+const createStatCommand = (program, { name, description, func }) => {
+  program
+    .command(name)
+    .description(description)
+    .action(async (options, command) => {
+      const parentOptions = command.parent.opts();
+      try {
+        const data = await parseData(parentOptions.file);
+
+        if (!isValidAndNotEmpty(data)) {
+          console.error('Error: Input contains no valid numerical data.');
+          process.exit(1);
+        }
+
+        const result = func(data);
+        console.log(formatResult(result, parentOptions.precision));
+      } catch (error) {
+        // The parser.js module handles detailed error logging.
+        // We just need to ensure the process exits with an error code.
+        // A special case for 'NO_INPUT' to avoid re-printing a message.
+        if (error.message !== 'NO_INPUT') {
+          // Log any unexpected errors during calculation.
+          console.error(`An unexpected error occurred during the '${name}' calculation:`, error.message);
+        }
+        process.exit(1);
+      }
+    });
+};
+
+/**
+ * Defines and executes the 'all' command, which calculates and displays a full
+ * summary of descriptive statistics.
+ *
+ * @param {Command} program - The main commander program instance.
+ */
+const createAllCommand = (program) => {
+  program
+    .command('all')
+    .description('Calculate and display all descriptive statistics.')
+    .action(async (options, command) => {
+      const parentOptions = command.parent.opts();
+      try {
+        const data = await parseData(parentOptions.file);
+
+        if (!isValidAndNotEmpty(data)) {
+          console.error('Error: Input contains no valid numerical data.');
+          process.exit(1);
+        }
+
+        const results = {
+          'Count': data.length,
+          'Sum': stats.sum(data),
+          'Min': stats.min(data),
+          'Max': stats.max(data),
+          'Range': stats.range(data),
+          'Mean': stats.mean(data),
+          'Median': stats.median(data),
+          'Mode': stats.mode(data),
+          'Q1 (25th percentile)': stats.q1(data),
+          'Q3 (75th percentile)': stats.q3(data),
+          'IQR (Interquartile Range)': stats.iqr(data),
+          'Variance (Sample)': stats.sampleVariance(data),
+          'Std Dev (Sample)': stats.sampleStandardDeviation(data),
+          'Variance (Population)': stats.populationVariance(data),
+          'Std Dev (Population)': stats.populationStandardDeviation(data),
+        };
+
+        console.log('--- Vector Statistics Summary ---');
+        const labelWidth = 'Std Dev (Population)'.length + 2; // Find max label length for alignment
+
+        for (const [label, value] of Object.entries(results)) {
+          const formattedValue = formatResult(value, parentOptions.precision);
+          console.log(`${label.padEnd(labelWidth)}: ${formattedValue}`);
+        }
+        console.log('---------------------------------');
+
+      } catch (error) {
+        if (error.message !== 'NO_INPUT') {
+          console.error('An unexpected error occurred while generating the summary:', error.message);
+        }
+        process.exit(1);
+      }
+    });
+};
+
+/**
+ * Main function to set up and run the CLI.
+ */
+const main = () => {
+  const program = new Command();
+
+  program
+    .name('vector-stats')
+    .version(version, '-v, --version', 'Output the current version')
+    .description(description)
+    .option('-f, --file <path>', 'Path to the input data file (one number per line or space-separated). If omitted, reads from stdin.')
+    .option('-p, --precision <digits>', 'Number of decimal places for floating-point results', (value) => parseInt(value, 10), 4)
+    .addHelpText('after', `
+Examples:
+  $ cat data.txt | vector-stats mean
+  $ vector-stats -f data.txt all
+  $ vector-stats median -f data.txt --precision 2
+  $ echo "1 2 3 4 5" | vector-stats stddev-sample
+
+If no command is specified, the program will show this help message.`);
+
+  // Define all individual statistic commands
+  const commands = [
+    { name: 'mean', description: 'Calculate the mean (average)', func: stats.mean },
+    { name: 'median', description: 'Calculate the median', func: stats.median },
+    { name: 'mode', description: 'Calculate the mode(s)', func: stats.mode },
+    { name: 'sum', description: 'Calculate the sum of all values', func: stats.sum },
+    { name: 'min', description: 'Find the minimum value', func: stats.min },
+    { name: 'max', description: 'Find the maximum value', func: stats.max },
+    { name: 'range', description: 'Calculate the range (max - min)', func: stats.range },
+    { name: 'variance', description: 'Calculate the sample variance', func: stats.sampleVariance },
+    { name: 'variance-pop', description: 'Calculate the population variance', func: stats.populationVariance },
+    { name: 'stddev', description: 'Calculate the sample standard deviation', func: stats.sampleStandardDeviation },
+    { name: 'stddev-pop', description: 'Calculate the population standard deviation', func: stats.populationStandardDeviation },
+    { name: 'q1', description: 'Calculate the first quartile (25th percentile)', func: stats.q1 },
+    { name: 'q3', description: 'Calculate the third quartile (75th percentile)', func: stats.q3 },
+    { name: 'iqr', description: 'Calculate the interquartile range (Q3 - Q1)', func: stats.iqr },
+  ];
+
+  commands.forEach(cmd => createStatCommand(program, cmd));
+
+  // Define the 'all' command for a full summary
+  createAllCommand(program);
+
+  // Show help if no command is provided
+  if (process.argv.length <= 2) {
+    program.outputHelp();
+    process.exit(0);
+  }
+
+  program.parseAsync(process.argv).catch(err => {
+    // Commander's own error handling is usually sufficient.
+    // This is a fallback for unexpected promise rejections during parsing.
+    console.error(`CLI Error: ${err.message}`);
+    process.exit(1);
+  });
+};
+
+main();

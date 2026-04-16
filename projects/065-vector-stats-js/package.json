@@ -1,0 +1,49 @@
+{
+  "name": "vector-stats-js",
+  "version": "1.0.0",
+  "description": "A lightweight, zero-dependency Node.js utility for basic statistical analysis on numerical vectors.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "vector-stats": "bin/vector-stats"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/vector-stats-js.git"
+  },
+  "keywords": [
+    "stats",
+    "statistics",
+    "math",
+    "vector",
+    "array",
+    "mean",
+    "median",
+    "mode",
+    "stddev",
+    "variance",
+    "data-science"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/vector-stats-js/issues"
+  },
+  "homepage": "https://github.com/your-username/vector-stats-js#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "commander": "^12.1.0"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ]
+}
