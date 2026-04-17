@@ -1,0 +1,50 @@
+{
+  "name": "cyclic-import-detective",
+  "version": "1.0.0",
+  "description": "A static analysis CLI tool for Node.js projects that detects and visualizes circular dependencies in both CommonJS and ES Modules.",
+  "type": "module",
+  "main": "src/cli.js",
+  "bin": {
+    "cyclic-import-detective": "bin/cyclic-import-detective",
+    "cid": "bin/cyclic-import-detective"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "cli",
+    "static-analysis",
+    "dependency-graph",
+    "circular-dependency",
+    "cycle-detection",
+    "es-modules",
+    "commonjs",
+    "refactoring",
+    "code-quality"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/cyclic-import-detective.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/cyclic-import-detective/issues"
+  },
+  "homepage": "https://github.com/your-username/cyclic-import-detective#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "acorn": "^8.11.3",
+    "acorn-walk": "^8.3.2",
+    "chalk": "^5.3.0",
+    "glob": "^10.4.1",
+    "graphology": "^0.25.4",
+    "graphology-gexf": "^0.10.2",
+    "graphology-graphml": "^0.6.2",
+    "tarjan-graph": "^2.0.2",
+    "yargs": "^17.7.2"
+  }
+}

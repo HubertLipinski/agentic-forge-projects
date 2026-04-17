@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+/**
+ * @file bin/cyclic-import-detective
+ * @description The executable script for the Cyclic Import Detective CLI.
+ *
+ * This script serves as the entry point when the tool is run from the command line.
+ * It's responsible for:
+ * 1. Setting the Node.js environment shebang (`#!/usr/bin/env node`).
+ * 2. Importing and executing the main CLI application logic from `src/cli.js`.
+ * 3. Handling top-level, un-ignorable errors and ensuring the process exits with
+ *    an appropriate status code.
+ *
+ * This separation keeps the executable file clean and delegates all complex
+ * logic (argument parsing, analysis orchestration, reporting) to the main
+ * application source code, which is more easily testable and maintainable.
+ */
+
+// ESM syntax requires the '.js' extension for local imports.
+import { run } from '../src/cli.js';
+
+/**
+ * An Immediately Invoked Function Expression (IIFE) to create an async scope
+ * at the top level of the script. This allows for the use of `await` and
+*  provides a clean way to handle fatal errors.
+ */
+(async () => {
+  try {
+    // Delegate the entire application execution to the `run` function.
+    // The `run` function in `src/cli.js` will handle argument parsing,
+    // orchestrating the analysis, and generating reports.
+    await run();
+  } catch (error) {
+    // This is a last-resort catch block for unexpected, fatal errors that
+    // were not handled gracefully within the application logic (e.g., in `cli.js`).
+    // A well-behaved application should ideally handle its errors before they
+    // bubble up this far.
+    console.error(
+      '\n[FATAL ERROR] An unexpected error occurred and the application has to exit.'
+    );
+    console.error('This may be a bug in Cyclic Import Detective.');
+    console.error('Please consider reporting it with the details below:');
+    console.error(error.stack || error.message || 'An unknown error occurred.');
+
+    // Exit with a non-zero status code to signal failure to shell scripts,
+    // CI/CD pipelines, or other calling processes.
+    process.exit(1);
+  }
+})();
