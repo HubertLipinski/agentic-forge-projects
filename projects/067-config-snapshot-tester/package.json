@@ -1,0 +1,48 @@
+{
+  "name": "config-snapshot-tester",
+  "version": "1.0.0",
+  "description": "A CLI tool and library for creating and testing snapshots of configuration files (JSON, YAML, .env) to prevent unintended breaking changes.",
+  "type": "module",
+  "main": "src/api.js",
+  "bin": {
+    "config-snap": "bin/config-snap"
+  },
+  "scripts": {
+    "start": "node bin/config-snap",
+    "test": "echo \"See examples/ci-integration.js for usage with test runners like Vitest or Jest\" && exit 0"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/config-snapshot-tester.git"
+  },
+  "keywords": [
+    "config",
+    "snapshot",
+    "testing",
+    "json",
+    "yaml",
+    "env",
+    "ci",
+    "cd",
+    "validation",
+    "schema",
+    "cli"
+  ],
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "dotenv": "^16.4.5",
+    "fast-json-stable-stringify": "^2.1.0",
+    "js-yaml": "^4.1.0",
+    "yargs": "^17.7.2"
+  }
+}

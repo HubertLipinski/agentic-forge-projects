@@ -1,0 +1,77 @@
+#!/usr/bin/env node
+
+/**
+ * @fileoverview Executable entry point for the config-snapshot-tester CLI.
+ *
+ * This script is the "shebang" file that gets executed when a user runs
+ * `config-snap` from their terminal. Its primary responsibilities are:
+ *
+ * 1. Setting the Node.js environment via the shebang line.
+ * 2. Importing the main CLI logic from `src/cli.js`.
+ * 3. Executing the CLI, which handles all command parsing and execution.
+ * 4. Providing a top-level, process-wide error handler for any uncaught
+ *    exceptions or unhandled promise rejections, ensuring the tool exits
+ *    gracefully with a non-zero status code on failure.
+ *
+ * This separation keeps the executable file minimal and delegates the complex
+ * CLI logic to the main application source code, promoting better organization
+ * and testability.
+ */
+
+import chalk from 'chalk';
+import { runCli } from '../src/cli.js';
+
+/**
+ * Main execution function.
+ * It wraps the CLI execution in a try-catch block to handle any synchronous
+ * errors that might occur during the yargs setup process itself, although
+ * most errors are handled within the `runCli` function's yargs configuration.
+ */
+function main() {
+  try {
+    // Delegate all CLI logic (parsing, command handling, output) to the cli module.
+    runCli();
+  } catch (error) {
+    // This is a fail-safe for unexpected synchronous errors during CLI initialization.
+    console.error(chalk.red.bold('A critical error occurred during CLI startup:'));
+    console.error(chalk.red(error.message));
+    if (error.stack) {
+      console.error(chalk.gray(error.stack));
+    }
+    process.exit(1);
+  }
+}
+
+// Set up global error handlers for the entire process.
+// This ensures that any unexpected, unhandled errors are caught and reported,
+// preventing the process from crashing silently. This is crucial for a robust CLI tool.
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error(chalk.red.bold('\nUnhandled Promise Rejection:'));
+  // `reason` can be an Error object or any other value.
+  if (reason instanceof Error) {
+    console.error(chalk.red(reason.message));
+    if (reason.stack) {
+      console.error(chalk.gray(reason.stack));
+    }
+  } else {
+    console.error(chalk.red('An unknown rejection occurred.'), reason);
+  }
+  // Log the promise that was rejected for deeper debugging if needed.
+  // console.error('At promise:', promise);
+  process.exit(1);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error(chalk.red.bold('\nUncaught Exception:'));
+  console.error(chalk.red(error.message));
+  if (error.stack) {
+    console.error(chalk.gray(error.stack));
+  }
+  // The 'uncaughtException' event is a sign of a serious bug.
+  // The recommended practice is to exit the process immediately.
+  process.exit(1);
+});
+
+// Execute the main function to start the CLI.
+main();
