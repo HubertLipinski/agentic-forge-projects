@@ -1,0 +1,47 @@
+{
+  "name": "markdown-link-checker",
+  "version": "1.0.0",
+  "description": "A lightweight, zero-dependency Node.js CLI tool and library to scan Markdown files and verify that all local and remote links are valid.",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "link-checker": "src/cli.js"
+  },
+  "files": [
+    "src/",
+    "index.js",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/markdown-link-checker.git"
+  },
+  "keywords": [
+    "markdown",
+    "link",
+    "checker",
+    "validator",
+    "cli",
+    "links",
+    "documentation",
+    "linter",
+    "broken-links"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/markdown-link-checker/issues"
+  },
+  "homepage": "https://github.com/your-username/markdown-link-checker#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "yargs-parser": "^21.1.1"
+  }
+}

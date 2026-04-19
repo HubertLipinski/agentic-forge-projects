@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/linkcheckerrc",
+  "//": "This is an example configuration file for markdown-link-checker.",
+  "//": "You can copy this to your project root as .linkcheckerrc.json and customize it.",
+
+  "timeout": 8000,
+  "//": "Timeout for each HTTP/HTTPS request in milliseconds. Default is 10000.",
+
+  "requestDelay": 200,
+  "//": "Delay between consecutive HTTP/HTTPS requests in milliseconds to avoid rate-limiting. Default is 100.",
+
+  "userAgent": "MyAwesomeDocs/1.0 LinkChecker",
+  "//": "Custom User-Agent string for HTTP/HTTPS requests. Defaults to the tool's name and version.",
+
+  "ignorePatterns": [
+    "http://localhost:.*",
+    "https://twitter.com/.*",
+    "https://github.com/your-username/markdown-link-checker/issues/new"
+  ]
+  "//": "An array of regular expression strings. Any URL matching one of these patterns will be ignored."
+}
