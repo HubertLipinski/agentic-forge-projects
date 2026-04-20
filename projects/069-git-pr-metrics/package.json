@@ -1,0 +1,42 @@
+{
+  "name": "git-pr-metrics",
+  "version": "1.0.0",
+  "description": "A command-line tool to analyze git repositories and generate key performance metrics for pull requests.",
+  "type": "module",
+  "main": "src/cli.js",
+  "bin": {
+    "git-pr-metrics": "bin/git-pr-metrics.js"
+  },
+  "scripts": {
+    "start": "node bin/git-pr-metrics.js"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/git-pr-metrics.git"
+  },
+  "keywords": [
+    "git",
+    "metrics",
+    "performance",
+    "pull-request",
+    "cli",
+    "devops",
+    "engineering-metrics",
+    "dora"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "date-fns": "^3.6.0",
+    "ora": "^8.0.1",
+    "yargs": "^17.7.2"
+  }
+}
