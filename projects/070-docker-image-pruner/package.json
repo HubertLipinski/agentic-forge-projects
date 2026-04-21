@@ -1,0 +1,42 @@
+{
+  "name": "docker-image-pruner",
+  "version": "1.0.0",
+  "description": "An interactive CLI tool for intelligently pruning local Docker images.",
+  "main": "src/cli.js",
+  "type": "module",
+  "bin": {
+    "prune-images": "bin/prune-images.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/docker-image-pruner.git"
+  },
+  "keywords": [
+    "docker",
+    "prune",
+    "cleanup",
+    "cli",
+    "devops",
+    "disk-space"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "dayjs": "^1.11.11",
+    "dockerode": "^4.0.2",
+    "filesize": "^10.1.2",
+    "inquirer": "^9.2.23",
+    "ora": "^8.0.1",
+    "yargs": "^17.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
