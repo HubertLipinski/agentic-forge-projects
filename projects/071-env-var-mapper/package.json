@@ -1,0 +1,48 @@
+{
+  "name": "env-var-mapper",
+  "version": "1.0.0",
+  "description": "A developer tool to scan a codebase and generate a comprehensive list of all environment variables being used.",
+  "type": "module",
+  "main": "src/core/mapper.js",
+  "bin": {
+    "env-var-mapper": "bin/env-var-mapper.js"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "scripts": {
+    "start": "node src/cli.js"
+  },
+  "dependencies": {
+    "acorn": "^8.11.3",
+    "acorn-walk": "^8.3.2",
+    "chalk": "^5.3.0",
+    "fast-glob": "^3.3.2",
+    "yargs": "^17.7.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "keywords": [
+    "env",
+    "environment",
+    "variables",
+    "scanner",
+    "parser",
+    "ast",
+    "dotenv",
+    "cli",
+    "developer-tool"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/env-var-mapper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/env-var-mapper/issues"
+  },
+  "homepage": "https://github.com/your-username/env-var-mapper#readme"
+}
