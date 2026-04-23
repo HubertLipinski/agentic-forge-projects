@@ -1,0 +1,97 @@
+{
+  "goblin": {
+    "name": "Goblin",
+    "renderable": {
+      "glyph": "g",
+      "fg": "#32CD32",
+      "renderOrder": 10
+    },
+    "viewshed": {
+      "range": 8
+    },
+    "combatStats": {
+      "maxHp": 16,
+      "defense": 1,
+      "power": 4
+    },
+    "ai": {
+      "type": "basic"
+    }
+  },
+  "orc": {
+    "name": "Orc",
+    "renderable": {
+      "glyph": "o",
+      "fg": "#006400",
+      "renderOrder": 10
+    },
+    "viewshed": {
+      "range": 6
+    },
+    "combatStats": {
+      "maxHp": 30,
+      "defense": 2,
+      "power": 8
+    },
+    "ai": {
+      "type": "basic"
+    }
+  },
+  "kobold": {
+    "name": "Kobold",
+    "renderable": {
+      "glyph": "k",
+      "fg": "#964B00",
+      "renderOrder": 10
+    },
+    "viewshed": {
+      "range": 10
+    },
+    "combatStats": {
+      "maxHp": 12,
+      "defense": 0,
+      "power": 3
+    },
+    "ai": {
+      "type": "basic"
+    }
+  },
+  "cave_troll": {
+    "name": "Cave Troll",
+    "renderable": {
+      "glyph": "T",
+      "fg": "#8B4513",
+      "renderOrder": 11
+    },
+    "viewshed": {
+      "range": 5
+    },
+    "combatStats": {
+      "maxHp": 50,
+      "defense": 4,
+      "power": 10
+    },
+    "ai": {
+      "type": "basic"
+    }
+  },
+  "giant_rat": {
+    "name": "Giant Rat",
+    "renderable": {
+      "glyph": "r",
+      "fg": "#A9A9A9",
+      "renderOrder": 10
+    },
+    "viewshed": {
+      "range": 7
+    },
+    "combatStats": {
+      "maxHp": 8,
+      "defense": 0,
+      "power": 2
+    },
+    "ai": {
+      "type": "basic"
+    }
+  }
+}

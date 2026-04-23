@@ -1,0 +1,40 @@
+{
+  "name": "telnet-roguelike-engine",
+  "version": "1.0.0",
+  "description": "A feature-rich engine for creating text-based, multiplayer roguelike games accessible via a standard Telnet client.",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "telnet-roguelike": "src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "keywords": [
+    "roguelike",
+    "telnet",
+    "game-engine",
+    "ecs",
+    "multiplayer",
+    "nodejs",
+    "text-based"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/telnet-roguelike-engine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/telnet-roguelike-engine/issues"
+  },
+  "homepage": "https://github.com/your-username/telnet-roguelike-engine#readme",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "uuid": "^9.0.1",
+    "yargs": "^17.7.2"
+  }
+}
