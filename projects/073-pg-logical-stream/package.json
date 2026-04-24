@@ -1,0 +1,52 @@
+{
+  "name": "pg-logical-streamer",
+  "version": "1.0.0",
+  "description": "A lightweight, pure JavaScript client for subscribing to PostgreSQL's logical replication stream.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "pg-logical-stream-cli": "bin/pg-logical-stream-cli.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/pg-logical-streamer.git"
+  },
+  "keywords": [
+    "postgresql",
+    "postgres",
+    "pg",
+    "logical",
+    "replication",
+    "stream",
+    "pgoutput",
+    "cdc",
+    "change-data-capture",
+    "real-time",
+    "database"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/pg-logical-streamer/issues"
+  },
+  "homepage": "https://github.com/your-username/pg-logical-streamer#readme",
+  "dependencies": {
+    "pg": "^8.11.5",
+    "yargs": "^17.7.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "files": [
+    "src/",
+    "bin/",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
