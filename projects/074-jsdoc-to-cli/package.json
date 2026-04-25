@@ -1,0 +1,44 @@
+{
+  "name": "jsdoc-to-cli",
+  "version": "1.0.0",
+  "description": "A zero-configuration code generator that creates a command-line interface (CLI) directly from JSDoc annotations in your JavaScript files.",
+  "type": "module",
+  "main": "src/core/generator.js",
+  "bin": {
+    "jsdoc-to-cli": "bin/generate-cli.js"
+  },
+  "scripts": {
+    "start": "node bin/generate-cli.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "cli",
+    "generator",
+    "jsdoc",
+    "commander",
+    "codegen",
+    "automation",
+    "developer-tools"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/jsdoc-to-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/jsdoc-to-cli/issues"
+  },
+  "homepage": "https://github.com/your-username/jsdoc-to-cli#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "glob": "^10.4.1",
+    "jsdoc-api": "^8.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
