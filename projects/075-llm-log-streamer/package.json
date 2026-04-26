@@ -1,0 +1,43 @@
+{
+  "name": "llm-log-streamer",
+  "version": "1.0.0",
+  "description": "A Node.js utility to intercept and stream OpenAI API requests/responses to various log transports.",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "llm-log-streamer": "bin/cli.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "openai",
+    "llm",
+    "proxy",
+    "logging",
+    "monitoring",
+    "observability",
+    "api",
+    "stream"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/llm-log-streamer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/llm-log-streamer/issues"
+  },
+  "homepage": "https://github.com/your-username/llm-log-streamer#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "pino": "^9.2.0",
+    "pino-pretty": "^11.2.1",
+    "undici": "^6.19.2",
+    "yargs": "^17.7.2"
+  }
+}
