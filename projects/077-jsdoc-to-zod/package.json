@@ -1,0 +1,50 @@
+{
+  "name": "jsdoc-to-zod",
+  "version": "1.0.0",
+  "description": "A CLI tool and library that automatically generates Zod schemas from your JavaScript code by parsing JSDoc type annotations.",
+  "main": "src/api.js",
+  "type": "module",
+  "bin": {
+    "jsdoc-to-zod": "bin/jsdoc-to-zod.js"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "scripts": {
+    "start": "node src/api.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/jsdoc-to-zod.git"
+  },
+  "keywords": [
+    "jsdoc",
+    "zod",
+    "schema",
+    "generator",
+    "validation",
+    "codegen",
+    "ast",
+    "cli",
+    "typescript",
+    "javascript"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/jsdoc-to-zod/issues"
+  },
+  "homepage": "https://github.com/your-username/jsdoc-to-zod#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "acorn": "^8.11.3",
+    "acorn-walk": "^8.3.2",
+    "doctrine": "^3.0.0",
+    "glob": "^10.4.1",
+    "yargs": "^17.7.2"
+  }
+}
