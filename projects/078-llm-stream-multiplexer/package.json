@@ -1,0 +1,50 @@
+{
+  "name": "llm-stream-multiplexer",
+  "version": "1.0.0",
+  "description": "A Node.js library for managing multiple concurrent streaming AI responses into a single, structured output stream.",
+  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "example:basic": "node examples/basic-usage.js",
+    "example:dynamic": "node examples/dynamic-add-stream.js",
+    "test": "node --test test/multiplexer.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/llm-stream-multiplexer.git"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "stream",
+    "multiplex",
+    "mux",
+    "openai",
+    "anthropic",
+    "async",
+    "iterator",
+    "json-patch"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/llm-stream-multiplexer/issues"
+  },
+  "homepage": "https://github.com/your-username/llm-stream-multiplexer#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "fast-json-patch": "^3.1.1",
+    "undici": "^6.19.2",
+    "uuid": "^9.0.1"
+  }
+}
