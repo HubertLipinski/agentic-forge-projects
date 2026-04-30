@@ -1,0 +1,99 @@
+#!/usr/bin/env node
+
+/**
+ * @file bin/log-ad
+ * @description The executable CLI script for the Log Anomaly Detector.
+ *
+ * This script serves as the entry point for running the application from the
+ * command line. It uses `yargs` to parse command-line arguments, loads the
+ * appropriate configuration, and then starts the main application logic.
+ * It also includes signal handlers for graceful shutdown.
+ */
+
+import yargs from 'yargs/yargs';
+import { hideBin } from 'yargs/helpers';
+import { run } from '../src/index.js';
+
+/**
+ * Sets up and runs the command-line interface using yargs.
+ * It defines the available commands, options, and their descriptions,
+ * then invokes the main application logic with the parsed arguments.
+ */
+async function main() {
+  const argv = await yargs(hideBin(process.argv))
+    .usage('Usage: $0 [options]')
+    .command('$0', 'Start the log anomaly detector', (yargs) => {
+      yargs
+        .option('file', {
+          alias: 'f',
+          type: 'string',
+          description: 'Path to a single log file to watch. Overrides config file setting.',
+          conflicts: 'files',
+        })
+        .option('files', {
+          alias: 'F',
+          type: 'array',
+          description: 'Paths to multiple log files or directories to watch. Overrides config file setting.',
+          conflicts: 'file',
+        })
+        .option('config', {
+          alias: 'c',
+          type: 'string',
+          description: 'Path to a JSON configuration file.',
+          normalize: true, // a.k.a. `path.resolve()`
+        });
+    })
+    .help('h')
+    .alias('h', 'help')
+    .version()
+    .alias('v', 'version')
+    .epilog('For more information, see the README.md file.')
+    .strict() // Report errors for unknown options
+    .fail((msg, err, yargs) => {
+      // Custom error handler for a better user experience
+      if (err) {
+        // Preserve stack trace for actual errors
+        console.error(err.stack || err.message);
+      } else {
+        console.error(`Error: ${msg}\n`);
+        yargs.showHelp();
+      }
+      process.exit(1);
+    })
+    .parseAsync();
+
+  try {
+    // The `run` function from `src/index.js` contains the main application logic.
+    // It returns a `shutdown` function that we can use for graceful termination.
+    const shutdown = await run(argv);
+
+    // Set up graceful shutdown handlers for signals that indicate termination.
+    // This ensures resources like file handles are closed properly.
+    const handleShutdown = async (signal) => {
+      console.log(`\nReceived ${signal}. Shutting down gracefully...`);
+      try {
+        await shutdown();
+        console.log('Shutdown complete.');
+        process.exit(0);
+      } catch (error) {
+        console.error('Error during shutdown:', error);
+        process.exit(1);
+      }
+    };
+
+    process.on('SIGINT', () => handleShutdown('SIGINT')); // Ctrl+C
+    process.on('SIGTERM', () => handleShutdown('SIGTERM')); // `kill` command
+    process.on('SIGQUIT', () => handleShutdown('SIGQUIT'));
+
+  } catch (error) {
+    // Catch initialization errors from the `run` function.
+    // These are often configuration or file system permission issues.
+    console.error(`[FATAL] Failed to start the application: ${error.message}`);
+    // For debugging, you might want to log the full stack trace.
+    // console.error(error.stack);
+    process.exit(1);
+  }
+}
+
+// Execute the main function.
+main();

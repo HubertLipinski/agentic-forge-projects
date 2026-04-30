@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Log Anomaly Detector Configuration",
+  "description": "Example configuration file for the log-anomaly-detector. All fields are optional and will fall back to default values if not provided, except for 'watcher.paths' which must be specified either here or via CLI.",
+
+  "watcher": {
+    "description": "Configuration for the log file watcher.",
+    "paths": [
+      "/var/log/app.log",
+      "/var/log/services/"
+    ],
+    "maxConcurrentFileReads": 10
+  },
+
+  "frequencyAnalysis": {
+    "description": "Configuration for detecting sudden bursts in log volume.",
+    "timeWindow": 60,
+    "burstMultiplier": 10,
+    "minLogCount": 50
+  },
+
+  "patternAnalysis": {
+    "description": "Configuration for detecting new, unseen log message patterns.",
+    "enabled": true
+  },
+
+  "alerter": {
+    "description": "Configuration for where to send anomaly alerts.",
+    "output": "stdout",
+    "filePath": "./log-ad-alerts.jsonl"
+  },
+
+  "pruneInterval": 300
+}

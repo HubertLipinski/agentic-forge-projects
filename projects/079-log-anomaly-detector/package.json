@@ -1,0 +1,42 @@
+{
+  "name": "log-anomaly-detector",
+  "version": "1.0.0",
+  "description": "A lightweight, real-time log monitoring tool that detects anomalies in streaming log data without machine learning.",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "log-ad": "bin/log-ad"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "log",
+    "monitoring",
+    "anomaly",
+    "detection",
+    "devops",
+    "cli",
+    "real-time",
+    "nodejs"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/log-anomaly-detector.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/log-anomaly-detector/issues"
+  },
+  "homepage": "https://github.com/your-username/log-anomaly-detector#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "p-limit": "^5.0.0",
+    "yargs": "^17.7.2"
+  }
+}
