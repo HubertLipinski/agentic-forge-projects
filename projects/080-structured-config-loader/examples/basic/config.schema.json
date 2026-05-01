@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Application Configuration Schema",
+  "description": "Defines the structure and constraints for the application's configuration.",
+  "type": "object",
+  "properties": {
+    "server": {
+      "type": "object",
+      "description": "Web server settings.",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The hostname the server will listen on.",
+          "default": "localhost"
+        },
+        "port": {
+          "type": "integer",
+          "description": "The port the server will listen on.",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 8080
+        }
+      },
+      "required": ["host", "port"]
+    },
+    "log": {
+      "type": "object",
+      "description": "Logging configuration.",
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "The logging level.",
+          "enum": ["error", "warn", "info", "http", "verbose", "debug", "silly"],
+          "default": "info"
+        }
+      },
+      "required": ["level"]
+    },
+    "database": {
+      "type": "object",
+      "description": "Database connection settings.",
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": "The username for the database connection."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password for the database connection."
+        }
+      },
+      "required": ["user", "password"]
+    },
+    "features": {
+      "type": "object",
+      "description": "Feature flag settings.",
+      "properties": {
+        "alpha": {
+          "type": "boolean",
+          "description": "Enable or disable the alpha feature.",
+          "default": false
+        },
+        "beta": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Enable or disable the beta feature.",
+              "default": false
+            }
+          },
+          "required": ["enabled"]
+        }
+      }
+    }
+  },
+  "required": [
+    "server",
+    "log",
+    "database"
+  ]
+}

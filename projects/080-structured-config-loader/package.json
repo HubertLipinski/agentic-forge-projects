@@ -1,0 +1,51 @@
+{
+  "name": "structured-config-loader",
+  "version": "1.0.0",
+  "description": "A zero-dependency Node.js library that loads, validates, and merges application configuration from multiple sources into a single, structured object.",
+  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "example:basic": "node examples/basic/index.js --port=9090 --log.level=debug --features.beta.enabled=true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/structured-config-loader.git"
+  },
+  "keywords": [
+    "config",
+    "configuration",
+    "loader",
+    "env",
+    "dotenv",
+    "yaml",
+    "json",
+    "argv",
+    "validation",
+    "schema",
+    "ajv",
+    "nodejs"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/structured-config-loader/issues"
+  },
+  "homepage": "https://github.com/your-username/structured-config-loader#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "dotenv": "^16.4.5",
+    "js-yaml": "^4.1.0",
+    "yargs-parser": "^21.1.1"
+  }
+}

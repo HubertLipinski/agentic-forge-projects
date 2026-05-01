@@ -1,0 +1,23 @@
+# examples/basic/config.yaml
+#
+# This is a sample YAML configuration file. It provides base values
+# that can be overridden by other sources like environment variables
+# or command-line arguments.
+
+server:
+  host: "0.0.0.0" # Overrides the schema default of 'localhost'
+  # The 'port' will be taken from the schema default (8080) initially,
+  # but the example command line `--port=9090` will override it.
+
+log:
+  level: "info" # This will be overridden by the .env file, which is then overridden by the CLI arg.
+
+database:
+  user: "yaml_user"
+  # The 'password' is intentionally omitted here. It is required by the schema
+  # and will be provided by the .env file to demonstrate merging required fields.
+
+features:
+  alpha: true # This will be overridden by the .env file (set to false).
+  # The nested 'beta' feature will be enabled via a command-line argument:
+  # --features.beta.enabled=true
