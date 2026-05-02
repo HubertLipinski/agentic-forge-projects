@@ -1,0 +1,49 @@
+{
+  "name": "network-chaos-injector",
+  "version": "1.0.0",
+  "description": "A programmatic network chaos testing tool for Node.js applications.",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "chaos-run": "bin/chaos-run.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/network-chaos-injector.git"
+  },
+  "keywords": [
+    "chaos",
+    "chaos-engineering",
+    "resilience",
+    "testing",
+    "network",
+    "http",
+    "https",
+    "latency",
+    "fault-injection",
+    "nodejs"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/network-chaos-injector/issues"
+  },
+  "homepage": "https://github.com/your-username/network-chaos-injector#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "ora": "^8.0.1",
+    "shimmer": "^1.2.1",
+    "yargs": "^17.7.2"
+  }
+}
