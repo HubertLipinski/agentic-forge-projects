@@ -1,0 +1,40 @@
+{
+  "name": "procedural-dungeon-net",
+  "version": "1.0.0",
+  "description": "A Node.js engine for generating and simulating persistent, multi-agent procedural dungeons for text-based games (MUDs, Roguelikes).",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "dungeon-net": "bin/run-server.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/procedural-dungeon-net.git"
+  },
+  "keywords": [
+    "mud",
+    "roguelike",
+    "procedural-generation",
+    "gamedev",
+    "nodejs",
+    "tcp",
+    "bsp"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/procedural-dungeon-net/issues"
+  },
+  "homepage": "https://github.com/your-username/procedural-dungeon-net#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "uuid": "^9.0.1",
+    "yargs": "^17.7.2"
+  }
+}
