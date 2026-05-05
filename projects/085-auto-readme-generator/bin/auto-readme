@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+
+/**
+ * Auto README Generator - CLI Executable
+ *
+ * This script serves as the entry point for the `auto-readme` command.
+ * It's a simple wrapper that uses Node.js to execute the main CLI logic
+ * located in `src/cli.js`. This approach ensures that the CLI can be
+ * run directly from the command line after a global or local binary installation.
+ *
+ * The `#!/usr/bin/env node` shebang line ensures that the script is executed
+ * using the Node.js interpreter available in the user's environment path.
+ * This makes the script portable across different systems where Node.js
+ * might be installed in various locations.
+ *
+ * This file is intentionally kept minimal. All complex logic, argument parsing,
+ * and error handling are delegated to the main application modules in the `src` directory,
+ * promoting a clean separation of concerns.
+ */
+
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { runCli } from '../src/cli.js';
+
+// Determine the root directory of the project where this bin script is located.
+// This is necessary to correctly resolve the path to the main CLI module (`src/cli.js`).
+// `import.meta.url` gives the URL of the current module.
+// `fileURLToPath` converts the file URL to a standard file system path.
+// `path.dirname` gets the directory name of the path (i.e., `/path/to/project/bin`).
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Construct the absolute path to the main CLI entry point.
+// We go up one level from `bin` to the project root, and then into `src`.
+// Using `path.resolve` ensures a correct, absolute path is formed, regardless of
+// how or from where the script is executed.
+// Note: The `../src/cli.js` path is relative to this file's location.
+// The `runCli` function is imported directly, which is a cleaner approach
+// when using ES Modules. This file now just acts as the invoker.
+
+// Execute the main CLI logic, passing along the command-line arguments.
+// `process.argv` contains the full command-line invocation, including the node
+// executable and the script path. The `runCli` function (using yargs' `hideBin`)
+// will handle slicing these off to get only the user-provided arguments.
+runCli(process.argv);

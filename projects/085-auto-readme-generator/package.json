@@ -1,0 +1,47 @@
+{
+  "name": "auto-readme-generator",
+  "version": "1.0.0",
+  "description": "A CLI tool that automates README.md creation by parsing project files like package.json, JSDoc comments, and license information.",
+  "type": "module",
+  "main": "src/engine.js",
+  "bin": {
+    "auto-readme": "bin/auto-readme"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "author": "Your Name <you@example.com> (https://your-website.com)",
+  "license": "MIT",
+  "keywords": [
+    "readme",
+    "generator",
+    "automation",
+    "cli",
+    "documentation",
+    "jsdoc",
+    "markdown"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/auto-readme-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/auto-readme-generator/issues"
+  },
+  "homepage": "https://github.com/your-username/auto-readme-generator#readme",
+  "dependencies": {
+    "glob": "^10.4.1",
+    "jsdoc-to-markdown": "^8.0.1",
+    "mustache": "^4.2.0",
+    "yargs": "^17.7.2"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md"
+  ]
+}
