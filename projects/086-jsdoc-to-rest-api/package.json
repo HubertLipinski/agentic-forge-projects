@@ -1,0 +1,50 @@
+{
+  "name": "jsdoc-to-rest",
+  "version": "1.0.0",
+  "description": "A CLI tool that generates a production-ready REST API server from JSDoc-annotated JavaScript service files.",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "generate-api": "bin/generate-api.js"
+  },
+  "scripts": {
+    "start": "node bin/generate-api.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jsdoc",
+    "rest",
+    "api",
+    "generator",
+    "express",
+    "cli",
+    "automation",
+    "codegen"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/jsdoc-to-rest.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/jsdoc-to-rest/issues"
+  },
+  "homepage": "https://github.com/your-username/jsdoc-to-rest#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "acorn": "^8.11.3",
+    "acorn-walk": "^8.3.2",
+    "ajv": "^8.12.0",
+    "comment-parser": "^1.4.1",
+    "ejs": "^3.1.9",
+    "eslint": "^8.57.0",
+    "express": "^4.19.2",
+    "prettier": "^3.2.5",
+    "yargs": "^17.7.2"
+  }
+}
