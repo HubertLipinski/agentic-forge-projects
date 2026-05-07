@@ -1,0 +1,172 @@
+#
+# Webhook Ingress Proxy - Example Configuration
+#
+# This file demonstrates how to configure various webhook routes.
+# It showcases features like signature validation, payload validation,
+# transformation, and fanning out to multiple downstream services.
+#
+# For full schema details, see `src/config/schema.js`.
+# Environment variables can be used with the ${VAR_NAME} syntax.
+#
+
+server:
+  host: 0.0.0.0
+  port: ${PORT:-3000} # Use environment variable PORT, or default to 3000
+  logLevel: info # Can be 'fatal', 'error', 'warn', 'info', 'debug', 'trace'
+
+routes:
+  # ============================================================================
+  # Example 1: GitHub Webhook for 'push' events
+  # - Validates the HMAC-SHA256 signature from GitHub.
+  # - Validates the payload to ensure it's a push event to the 'main' branch.
+  # - Transforms the payload into a simpler format.
+  # - Forwards the transformed payload to two downstream services.
+  # ============================================================================
+  - id: github-push-main
+    path: /webhooks/github
+    methods: [POST]
+    # 'match' provides fine-grained routing. This route will only be triggered
+    # if the request has the 'X-GitHub-Event: push' header.
+    match:
+      headers:
+        X-GitHub-Event: push
+
+    validation:
+      # Verifies the request signature to ensure it's from GitHub.
+      signature:
+        enabled: true
+        algorithm: sha256
+        # The secret should be stored as an environment variable for security.
+        secret: ${GITHUB_WEBHOOK_SECRET}
+        header: X-Hub-Signature-256
+
+      # Validates the incoming payload against a JSON schema.
+      payload:
+        enabled: true
+        schema:
+          type: object
+          properties:
+            ref:
+              type: string
+              const: refs/heads/main # Only match pushes to the 'main' branch
+            repository:
+              type: object
+              properties:
+                full_name: { type: string }
+              required: [full_name]
+            pusher:
+              type: object
+              properties:
+                name: { type: string }
+              required: [name]
+            commits:
+              type: array
+              minItems: 1
+              items:
+                type: object
+                properties:
+                  id: { type: string }
+                  message: { type: string }
+                required: [id, message]
+          required: [ref, repository, pusher, commits]
+
+    # Transforms the complex GitHub payload into a simpler, custom format
+    # using a JSONata expression.
+    transform:
+      enabled: true
+      expression: >
+        {
+          "source": "github",
+          "eventType": "push",
+          "repository": repository.full_name,
+          "branch": ref,
+          "pusher": pusher.name,
+          "commitCount": $count(commits),
+          "latestCommit": {
+            "id": commits[0].id,
+            "message": commits[0].message
+          }
+        }
+
+    forward:
+      targets:
+        # Target 1: A CI/CD service to trigger a new build.
+        - id: ci-service-trigger
+          url: ${CI_SERVICE_URL}/build
+          method: POST
+          headers:
+            Authorization: "Bearer ${CI_SERVICE_API_KEY}"
+          # Configure a robust retry policy for this critical service.
+          retry:
+            enabled: true
+            maxRetries: 5
+            initialInterval: 2000 # 2 seconds
+            backoffFactor: 2
+
+        # Target 2: A logging service for analytics.
+        - id: analytics-logger
+          url: ${ANALYTICS_SERVICE_URL}/events
+          method: POST
+          # This target is less critical, so we can use a less aggressive retry policy.
+          retry:
+            enabled: true
+            maxRetries: 2
+            initialInterval: 5000 # 5 seconds
+
+  # ============================================================================
+  # Example 2: Stripe Webhook for 'charge.succeeded' events
+  # - Validates the HMAC-SHA256 signature from Stripe.
+  # - No transformation; forwards the original payload.
+  # - Forwards to a single downstream billing service.
+  # ============================================================================
+  - id: stripe-charge-succeeded
+    path: /webhooks/stripe
+    methods: [POST]
+    # Use a JSONata expression in 'match.payload' to route based on content.
+    # This is useful when a single endpoint receives multiple event types.
+    match:
+      payload: "type = 'charge.succeeded'"
+
+    validation:
+      signature:
+        enabled: true
+        algorithm: sha256
+        secret: ${STRIPE_WEBHOOK_SECRET}
+        header: Stripe-Signature # Stripe uses a different signature header
+
+    # Transformation is disabled for this route. The original Stripe payload
+    # will be forwarded as-is.
+    transform:
+      enabled: false
+
+    forward:
+      targets:
+        - id: billing-service
+          url: ${BILLING_SERVICE_URL}/stripe-hook
+          method: POST
+          retry:
+            maxRetries: 3
+            initialInterval: 1000
+
+  # ============================================================================
+  # Example 3: A simple, generic webhook endpoint
+  # - No signature or payload validation.
+  # - Forwards the raw payload to a single target.
+  # - Useful for simple internal services or trusted third parties.
+  # ============================================================================
+  - id: generic-ingress
+    path: /webhooks/generic
+    methods: [POST, PUT] # Accepts multiple HTTP methods
+
+    # No validation block means all validation is skipped.
+
+    # No transform block means the original payload is used.
+
+    forward:
+      targets:
+        - id: internal-logger
+          url: http://localhost:8081/log
+          method: POST
+          # Disable retries for this target.
+          retry:
+            enabled: false

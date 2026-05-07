@@ -1,0 +1,47 @@
+{
+  "name": "webhook-ingress-proxy",
+  "version": "1.0.0",
+  "description": "A configurable, stand-alone HTTP server that proxies incoming webhooks to multiple downstream services. It provides request validation, payload transformation, and retry logic, decoupling webhook consumers from producers.",
+  "main": "src/server.js",
+  "type": "module",
+  "bin": {
+    "webhook-proxy": "bin/proxy-server.js"
+  },
+  "scripts": {
+    "start": "node bin/proxy-server.js"
+  },
+  "keywords": [
+    "webhook",
+    "proxy",
+    "ingress",
+    "microservices",
+    "api-gateway",
+    "fastify",
+    "http",
+    "server"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/webhook-ingress-proxy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/webhook-ingress-proxy/issues"
+  },
+  "homepage": "https://github.com/your-username/webhook-ingress-proxy#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^3.0.1",
+    "fastify": "^4.26.2",
+    "js-yaml": "^4.1.0",
+    "jsonata": "^2.0.5",
+    "pino": "^8.20.0",
+    "pino-pretty": "^11.0.0",
+    "undici": "^6.13.0",
+    "yargs": "^17.7.2"
+  }
+}
